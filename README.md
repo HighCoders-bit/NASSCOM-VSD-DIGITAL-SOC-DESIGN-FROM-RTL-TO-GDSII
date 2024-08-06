@@ -10,4 +10,7 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
    * [D2 SK2 Library binding and placement](d2-sk2-library-binding-and-placements)
    * [D2 SK3 Cell design and characterization flows](d2-sk3-cell-design-and-charaterization-flows)
    * [D2 SK4 General timing characterization](D2-sk4-general-timing-characterization)
-  
+ * [Day 3 Design library cells using magic layout and ngspice characterization](day-3-design-library-cells-using-magic-layout-and-ngspice-characterization)
+    * [D3 SK1 Labs for CMOS Inverter and ngspice simulation](d3-sk1-labs-for-cmos-invereter-and-ngspice-simulation)
+    * [D3 SK2 Inception of layout and CMOS fabrication process](d3-sk2-inception-of-layout-and-CMOS-fabrication-process)
+    * [D3 SK3 Sky130 Tech File labs](d3-sk3-sky130-tech-file-labs) 
