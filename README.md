@@ -36,4 +36,59 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
 
 ![Screenshot 2024-07-13 095251](https://github.com/user-attachments/assets/4586126a-86a6-4234-bf5c-0961a8ffaebc)
  It consist of SRAM,SOC,ADC,DAC,SPI these all are called foundary IP's.All devices depends upon foundary where all chips are fabricated using deposition and lithography techniques and so on.
+ ### INSIDE A MICROCONTROLLER BOARD 
  
+![Screenshot 2024-07-13 095935](https://github.com/user-attachments/assets/e5d67db0-74fa-4c2a-9d94-967bccf3421c)
+![inside die](https://github.com/user-attachments/assets/02cf2094-608b-4567-8c2f-f2a576f7e8e1)
+### Microcontroller Board Components
+#### Core:
+
+Definition: The central processing unit (CPU) of the microcontroller that executes instructions.
+Example: ARM Cortex-M, RISC-V core.
+Die:
+
+Definition: The physical silicon chip on which the microcontroller’s circuitry is fabricated.
+#### Pad:
+
+Definition: The physical connection points on the microcontroller chip where external components are connected.
+#### GPIO (General-Purpose Input/Output):
+
+Definition: Pins on the microcontroller that can be programmed to either input signals (e.g., sensors) or output signals (e.g., LEDs).
+#### Bank:
+
+Definition: A grouping of I/O pins or memory segments used for organization within the microcontroller. For GPIO, it refers to a set of pins grouped together.
+#### Foundries:
+
+Definition: Facilities where the microcontroller chips are manufactured. Examples include TSMC, Intel.
+#### IPs (Intellectual Properties):
+
+Definition: Pre-designed blocks of logic that can be integrated into the microcontroller. Examples include UART, SPI, and I2C controllers.
+#### SRAM (Static Random-Access Memory):
+
+Definition: A type of volatile memory used for temporary data storage within the microcontroller. Fast but more expensive and power-consuming than DRAM.
+#### DRAM (Dynamic Random-Access Memory):
+
+Definition: A type of volatile memory used for larger, temporary data storage. Requires periodic refreshing to maintain data.
+#### ADC (Analog-to-Digital Converter):
+
+Definition: Converts analog signals (e.g., sensor outputs) into digital values that can be processed by the microcontroller.
+#### DAC (Digital-to-Analog Converter):
+
+Definition: Converts digital values into analog signals (e.g., to drive speakers or analog displays).
+#### RISC-V SoC (System on Chip):
+
+Definition: A microcontroller or microprocessor incorporating a RISC-V core along with additional integrated components such as memory, peripherals, and communication interfaces.
+#### Macros:
+
+Definition: Predefined sequences of code or hardware configurations used to simplify and automate repetitive tasks in programming or hardware design.
+#### Connecting All Components
+Core: Executes instructions and processes data.
+Die: Houses the core and other integrated components.
+Pad: Connects the die to external components via GPIO.
+GPIO: Interfaces with external devices, configured via macros.
+Bank: Organizes GPIO and other resources.
+Foundries: Manufacture the microcontroller with the integrated core, SRAM, DRAM, ADC, DAC, and IPs.
+IPs: Provide specialized functions like UART and SPI, integrated into the SoC.
+SRAM & DRAM: Store data temporarily for processing and operation.
+ADC & DAC: Enable analog signal processing and generation.
+This layout ensures a microcontroller can interact with the external world and perform complex tasks by integrating various components into a single, functional chip.
