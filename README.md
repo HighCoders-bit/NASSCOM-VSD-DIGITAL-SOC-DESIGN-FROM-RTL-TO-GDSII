@@ -152,3 +152,31 @@ Features: Includes libraries, design rules, and models specific to the 130nm tec
 * #### Signoff: Verify design with DRC, LVS, and ERC.
 * #### GDSII File Generation: Generate the final layout file for manufacturing.
  ## SKY L3 Introduction to openlane and strive chipsets
+![Capture](https://github.com/user-attachments/assets/8744bc7f-5d48-4e61-ad8a-c397ddfe62ea)
+
+Strive SoC is an open-source System on Chip (SoC) project aimed at providing a comprehensive platform for learning, experimentation, and development in digital design. Here’s a brief overview:
+
+#### Strive SoC Overview
+##### Purpose:
+
+Strive SoC is designed to offer a practical, educational platform for understanding SoC design principles and techniques.
+It provides a reference design that can be used for academic purposes, prototyping, and as a starting point for custom SoC development.
+##### Components:
+
+**Processor Core**: Includes a basic RISC-V or other open-source CPU core.
+**Peripherals**: Features standard peripherals such as UART, GPIO, timers, and memory interfaces.
+**Interconnects**: Uses a bus or network-on-chip (NoC) architecture to connect various components.
+**Memory**: Includes SRAM and/or DRAM for storage and cache.
+##### Design Tools:
+
+**EDA Tools**: Utilizes open-source EDA tools like OpenROAD, OpenLane, and QROad for design, synthesis, and layout.
+**Simulation**: Integration with simulation tools for verification of design functionality.
+Process Technology:
+
+The SoC can be designed using various process technologies, often utilizing open-source PDKs like the Google Skywater 130nm PDK.
+Features:
+
+**Educational Focus**: Designed to help users understand the complete SoC design flow from RTL to GDSII.
+Customizability: Allows users to modify and extend the design to suit specific needs or experimental purposes.
+Applications:
+
