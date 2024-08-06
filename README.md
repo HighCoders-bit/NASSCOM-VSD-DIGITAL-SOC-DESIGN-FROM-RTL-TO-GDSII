@@ -143,10 +143,10 @@ Features: Includes libraries, design rules, and models specific to the 130nm tec
 ## SKY L2 simplified RTL TO GDSII MODEL
 
 ![Capture1](https://github.com/user-attachments/assets/28aa102c-c1b6-48a9-b779-84b4926f9b0c)
-* RTL Design: Create a high-level description of the circuit.
-* Synthesis: Convert RTL code to a gate-level netlist.
-* Floorplanning and Power Planning: Arrange blocks and plan power distribution.
-* Clock Tree Synthesis: Design the clock distribution network.
-* Routing: Connect the gates and flip-flops.
-* Signoff: Verify design with DRC, LVS, and ERC.
-* GDSII File Generation: Generate the final layout file for manufacturing.
+* #### RTL Design: Create a high-level description of the circuit.
+* #### Synthesis: Convert RTL code to a gate-level netlist.
+* #### Floorplanning and Power Planning: Arrange blocks and plan power distribution.
+* #### Clock Tree Synthesis: Design the clock distribution network.
+* #### Routing: Connect the gates and flip-flops.
+* #### Signoff: Verify design with DRC, LVS, and ERC.
+* #### GDSII File Generation: Generate the final layout file for manufacturing.
