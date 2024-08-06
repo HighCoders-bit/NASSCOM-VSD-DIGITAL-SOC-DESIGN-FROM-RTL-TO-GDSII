@@ -27,3 +27,6 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
   ##  Day 1 - Inception of open-source EDA OpenLANE and sky130 PDK
   ### D1 SK1 How To Talk to Computers
   ## SKY L1 Introduction to QFN-48 Package chip pads core die and IPs
+  
+  ![Screenshot 2024-07-13 095151](https://github.com/user-attachments/assets/fe5f6945-5a50-4bef-bb30-09e41b7620be)
+
