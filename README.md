@@ -8,6 +8,7 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
        * [SKY L3 From software applications to Hardware](#sky-l3-from-software-applications-to-hardware)
    * [D1 SK2 SOC Design and OPENLANE](#d1-sk2-soc-design-and-openlane)
        * [SKY L1 Introduction to all components of an open-source digital ASIC design](#sky-l1-introduction-to-all-components-of-an-open-source-digital-asic-design)
+       * [SKY L2 simplified RTL TO GDSII MODEL](#sky-l2-simplified-rtl-to-gdsii-model)
    * [D1 SK3 Get Familiar with Open Source EDA Tools](#d1-sk3-get-familiar-with-open-source-eda-tools)
 * [Day 2 Good floorplan vs bad floorplan and introduction to library cells](#day-2-goodfloorplan-vs-bad-floorplan-and-introduction-to-library-cells)
    * [D2 SK1 Chip floor planning considerations](#d2-sk1-chip-floor-planning-considerations)
@@ -139,3 +140,4 @@ Purpose: Ensures designs are manufacturable and provides parameters for accurate
 
 Definition: An open-source PDK for the SkyWater 130nm process technology.
 Features: Includes libraries, design rules, and models specific to the 130nm technology node.
+## SKY L2 simplified RTL TO GDSII MODEL
