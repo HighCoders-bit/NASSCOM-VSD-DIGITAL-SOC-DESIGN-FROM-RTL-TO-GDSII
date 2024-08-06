@@ -23,4 +23,4 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
      * [D5 SK1 Routing and design rule check](d5-sk1-routing-and-design-rule-check)
      * [D5 SK2 Power distribution network and routing](d5-sk2-power-distribution-network-and-routing)
      * [D5 SK3 Tritron route features](d5-sk3-tritron-route-features)
-  ## Day 1 - Inception of open-source EDA OpenLANE and sky130 PD
+  ##  Day 1 - Inception of open-source EDA OpenLANE and sky130 PDK
