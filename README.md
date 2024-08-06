@@ -116,4 +116,4 @@ Netlist Synthesis: The RTL description is synthesized into a netlist, a detailed
 
 Key Takeaways: This diagram highlights the layered abstraction involved in bridging the gap between software and hardware. It emphasizes the crucial role of compilers, assemblers, and hardware design tools in translating abstract instructions into physical circuits. Understanding this flow provides valuable insights into the relationship between software, hardware, and the underlying computer architecture.
 ### D1 SK2 SOC Design and OPENLANE
-## SKY L1 Introduction to all components of a open source digital asic design
+## SKY L1 Introduction to all components of an open-source digital ASIC design
