@@ -207,3 +207,4 @@ Every time the netlist is modified.(CTS modifies the netlist and Post Placements
 ![Screenshot 2024-07-13 150323](https://github.com/user-attachments/assets/dfed294c-36d8-4de1-8daa-a4a1be766e52)
 
 With OpenLANE, we took a preventive approach. here we add fake antenna diode next to every cell input after placement. Then run the Antenna checker on the routed layout. If the checker reports a violation on cell input pin, replace the fake diode cell by a real one.
+## D1 SK3 Get Familiar with Open Source EDA Tools(LAB)
