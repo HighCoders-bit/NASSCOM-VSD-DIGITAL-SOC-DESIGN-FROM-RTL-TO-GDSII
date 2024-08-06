@@ -117,3 +117,25 @@ Netlist Synthesis: The RTL description is synthesized into a netlist, a detailed
 Key Takeaways: This diagram highlights the layered abstraction involved in bridging the gap between software and hardware. It emphasizes the crucial role of compilers, assemblers, and hardware design tools in translating abstract instructions into physical circuits. Understanding this flow provides valuable insights into the relationship between software, hardware, and the underlying computer architecture.
 ### D1 SK2 SOC Design and OPENLANE
 ## SKY L1 Introduction to all components of an open-source digital ASIC design
+
+![Screenshot 2024-07-13 120549](https://github.com/user-attachments/assets/7d58721f-1fb1-4b61-80c0-a62b4cc2935e)
+Introduction to All Components of a Digital ASIC Design
+### RTL Design (Register Transfer Level Design):
+
+Definition: Describes the logic and behavior of a digital circuit using registers and the data transfers between them.
+Purpose: Defines the functionality and operations of the circuit.
+### EDA Tools (Electronic Design Automation Tools):
+
+Definition: Software tools used for designing, simulating, and verifying electronic systems and integrated circuits.
+### Open-Source Tools:
+QROad: Focuses on routing within digital ASIC designs.
+OpenROAD: Provides a comprehensive tool suite for placement, routing, and design rule checking.
+OpenLane: Offers an end-to-end RTL-to-GDSII flow, integrating with other open-source tools.
+### PDK (Process Design Kit):
+
+Definition: Contains files and information from semiconductor foundries describing the manufacturing process and design rules.
+Purpose: Ensures designs are manufacturable and provides parameters for accurate simulation.
+### Google Skywater 130nm PDK:
+
+Definition: An open-source PDK for the SkyWater 130nm process technology.
+Features: Includes libraries, design rules, and models specific to the 130nm technology node.
