@@ -4,7 +4,7 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
 * [Day 1 - Inception of open-source EDA OpenLANE and sky130 PDK](#day-1---inception-of-open-source-eda-openlane-and-sky130-pdk)
    * [D1 SK1 How To Talk to Computers](#d1-sk1-how-to-talk-to-computers)
        * [SKY L1 Introduction to QFN-48 Package chip pads core die and IPs](#sky-l1-introduction-to-qfn-48-package-chip-pads-core-die-and-ips)
-       * [SKY L2 Introduction to RISC-V](#sky-l2-introduction-to-risc--v)
+       * [SKY L2 Introduction to RISC-V](#sky-l2-introduction-to-risc-v)
    * [D1 SK2 SOC Design and OPENLANE](#d1-sk2-soc-design-and-openlane)
    * [D1 SK3 Get Familiar with Open Source EDA Tools](#d1-sk3-get-familiar-with-open-source-eda-tools)
 * [Day 2 Good floorplan vs bad floorplan and introduction to library cells](#day-2-goodfloorplan-vs-bad-floorplan-and-introduction-to-library-cells)
