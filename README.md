@@ -16,7 +16,10 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
     * [D3 SK3 Sky130 Tech File labs](d3-sk3-sky130-tech-file-labs)
  * [DAY 4 Prelayout timing analysis and importance of good clock tree](day-4-prelayout-timing-analysis-and-importance-of-good-clock-tree)
     * [D4 SK1 Timing modelling using delay tables](d4-sk1-timing-modelling-using-delay-tables)
-    * [D4 SK2 Timing analysis using ideal clock using openSTA)(d4-sk2-timing-analysis-using-ideal-clock-using-opensta)
+    * [D4 SK2 Timing analysis using ideal clock using openSTA](d4-sk2-timing-analysis-using-ideal-clock-using-opensta)
     * [D4 SK3 Clock Tree Synthesis TritonCTS and signal integrity](d4-sk3-clock-tree-synthesis-tritonCTS-and-signal-integrity)
     * [D4  SK4 Timing analysis with real clocks using openSTA](d4-sk4-timing-analysis-with-real-clocks-using-open-sta)
-  * [DAY 5 Final steps for RTL2GDS using Tritron
+  * [DAY 5 Final steps for RTL2GDS using Tritronroute and openSTA](day-5-final-steps-for-rtl2gds-using-tritronroute-and-opensta)
+     * [D5 SK1 Routing and design rule check](d5-sk1-routing-and-design-rule-check)
+     * [D5 SK2 Power distribution network and routing](d5-sk2-power-distribution-network-and-routing)
+     * [D5 SK3 Tritron route features](d5-sk3-tritron-route-features)
