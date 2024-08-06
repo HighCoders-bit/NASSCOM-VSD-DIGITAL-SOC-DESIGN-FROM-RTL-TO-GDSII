@@ -13,4 +13,10 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
  * [Day 3 Design library cells using magic layout and ngspice characterization](day-3-design-library-cells-using-magic-layout-and-ngspice-characterization)
     * [D3 SK1 Labs for CMOS Inverter and ngspice simulation](d3-sk1-labs-for-cmos-invereter-and-ngspice-simulation)
     * [D3 SK2 Inception of layout and CMOS fabrication process](d3-sk2-inception-of-layout-and-CMOS-fabrication-process)
-    * [D3 SK3 Sky130 Tech File labs](d3-sk3-sky130-tech-file-labs) 
+    * [D3 SK3 Sky130 Tech File labs](d3-sk3-sky130-tech-file-labs)
+ * [DAY 4 Prelayout timing analysis and importance of good clock tree](day-4-prelayout-timing-analysis-and-importance-of-good-clock-tree)
+    * [D4 SK1 Timing modelling using delay tables](d4-sk1-timing-modelling-using-delay-tables)
+    * [D4 SK2 Timing analysis using ideal clock using openSTA)(d4-sk2-timing-analysis-using-ideal-clock-using-opensta)
+    * [D4 SK3 Clock Tree Synthesis TritonCTS and signal integrity](d4-sk3-clock-tree-synthesis-tritonCTS-and-signal-integrity)
+    * [D4  SK4 Timing analysis with real clocks using openSTA](d4-sk4-timing-analysis-with-real-clocks-using-open-sta)
+  * [DAY 5 Final steps for RTL2GDS using Tritron
