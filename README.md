@@ -10,6 +10,7 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
        * [SKY L1 Introduction to all components of an open-source digital ASIC design](#sky-l1-introduction-to-all-components-of-an-open-source-digital-asic-design)
        * [SKY L2 simplified RTL TO GDSII MODEL](#sky-l2-simplified-rtl-to-gdsii-model)
        * [SKY L3 Introduction to openlane and strive chipsets](#sky-l3-introduction-to-openlane-and-strive-chipsets)
+       * [SKY L4 Introduction to OPENLANE and detailed ASIC designed flow](#sky-l4-introduction-to-openlane-and-detailed-asic-designed-flow)
    * [D1 SK3 Get Familiar with Open Source EDA Tools](#d1-sk3-get-familiar-with-open-source-eda-tools)
 * [Day 2 Good floorplan vs bad floorplan and introduction to library cells](#day-2-goodfloorplan-vs-bad-floorplan-and-introduction-to-library-cells)
    * [D2 SK1 Chip floor planning considerations](#d2-sk1-chip-floor-planning-considerations)
@@ -179,4 +180,30 @@ Features:
 **Educational Focus**: Designed to help users understand the complete SoC design flow from RTL to GDSII.
 Customizability: Allows users to modify and extend the design to suit specific needs or experimental purposes.
 Applications:
+## SKY L4 Introduction to OPENLANE and detailed ASIC designed flow
 
+
+![Capture (1)](https://github.com/user-attachments/assets/580ae3fe-e7a1-4d54-825a-98b82c998319)
+**Illustrates the comprehensive OpenLANE flow, encompassing design exploration, physical implementation, and sign-off. Key stages include:**
+
+* **RTL Synthesis**: Converting Register Transfer Level (RTL) code into a gate-level netlist.
+* **Floorplanning & Placement**: Planning the chip layout and placing standard cells.
+* **CTS & Routing**: Clock Tree Synthesis and interconnecting placed cells with metal layers.
+* **Static Timing Analysis (STA)**: Verifying timing closure.
+* **Physical Verification**: Ensuring design rule compliance (DRC) and layout vs. schematic (LVS) correctness.
+* **DFT(Design for Test)**: it perform scan inserption, automatic test pattern generation, Test patterns compaction, Fault coverage, Fault simulation.After that physical implementation is done by OpenROAD app
+* **Static Timing analysis(STA)**: It involves the interconnect RC Extraction(DEF2SPEF) from the routed layout, followed by STA on OpenSTA(OpenROAD) tool. resulting report will shows the timing violations if any violations is there.
+* **Physical Verification(DRC and LVS)**: Magic is used for design Rules checking and SPICE Extraction from Layout. Magic and Netgen are used for LVS.
+
+Every time the netlist is modified.(CTS modifies the netlist and Post Placements optimization also modifies the netlist).So for that verification must be performed. The LCE(yosys) is used to formally confirm that the function did not change after modifying the netlist. 
+  
+![Capture1 (1)](https://github.com/user-attachments/assets/aeb32125-4582-45ab-88ee-0a147486ba47)
+
+ **Dealing with antenna rules Violation**: When a metal wire segment is fabricated, it can act as antenna.As an antenna, it collect charges which can damaged the transister gates during the fabrication.
+ ![Capture2](https://github.com/user-attachments/assets/56658377-62ad-4058-9e61-d97f3c669b31)
+ To address this issue, we have to limit the lenght of the wire. usually this is the job of the router. If router fails to do this, then there are two solutions: Bridging attaches a higher layer intermediary.Add antenna diode cell to leak away charges.(Antenna diodes are provided by the SCL)
+
+
+![Screenshot 2024-07-13 150323](https://github.com/user-attachments/assets/dfed294c-36d8-4de1-8daa-a4a1be766e52)
+
+With OpenLANE, we took a preventive approach. here we add fake antenna diode next to every cell input after placement. Then run the Antenna checker on the routed layout. If the checker reports a violation on cell input pin, replace the fake diode cell by a real one.
