@@ -516,7 +516,7 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 ![VirtualBox_vsdworkshop_29_07_2024_20_54_40](https://github.com/user-attachments/assets/283ef591-b336-4dbe-af7a-888192fc9422)
 
 ![VirtualBox_vsdworkshop_07_08_2024_13_31_27](https://github.com/user-attachments/assets/9a2b31c9-9d4b-45eb-b046-a08a408f2383)
-##  Cell design and characterization flows
+##  D2 SK3 Cell design and characterization flows
 ### Inputs for cell design flow
 In Cell Design Flow, Gates, flipflops, buffers are named as 'Standard Cells'. These standard cells are being placed in the section called as 'Library'.And in the library many other cells are available which have same functionality but the size is different.
 
