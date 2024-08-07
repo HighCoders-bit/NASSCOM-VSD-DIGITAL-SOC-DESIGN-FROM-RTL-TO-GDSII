@@ -722,31 +722,26 @@ ngspice sky130_inv.spice
 plot y vs time a
 ```
 ![VirtualBox_vsdworkshop_01_08_2024_20_01_26](https://github.com/user-attachments/assets/2cefd190-8555-471c-b709-b24be3350827)
-![VirtualBox_vsdworkshop_07_08_2024_19_01_06](https://github.com/user-attachments/assets/0a881800-b855-43ec-b7d3-ff40a2161108)
+![VirtualBox_vsdworkshop_07_08_2024_19_01_06](https://github.com/user-attachments/assets/0a881800-b855-43ec-b7d3-ff40a2161108)  
 **Rise time**
 It is time taken to the output waveform to 20% value to 80% value.
-![VirtualBox_vsdworkshop_01_08_2024_20_30_39 -Rise time(2 24-2 18)](https://github.com/user-attachments/assets/61afadca-542a-4277-93c2-95fc8b91b555)
-so, rise time= (2.24609 - 2.18215)e-09 = 63.94 psec.
-**Fall time**
-it is the time take by output for transition from 80% to 20%.
-
-![fall time 4 095-4 59](https://github.com/user-attachments/assets/675d8253-1006-42eb-91b1-8f7a05f5ccd2)
-so, fall time= (4.09515 - 4.05269)e-09 = 42.46 psec
- **Propagation delay**
- it is the time difference between the 50% of input and 50% of the output.
-
-![VirtualBox_vsdworkshop_01_08_2024_20_42_57 prop delay(2 21-2 15) - Copy](https://github.com/user-attachments/assets/3bc518c0-aa14-4795-8028-6ab2c5bddda5)
-
-so, propogation delay =(2.21086 - 2.15)e-09 = 60.86 psec.
-**Cell rise delay**
-Time taken by output to rise to 50% and input to fall to 50%
-![VirtualBox_vsdworkshop_07_08_2024_19_31_06](https://github.com/user-attachments/assets/1e5fdf56-a6e5-42cd-9263-d71209b4c590)
-
-so,cell rise delay=(2.21078-2.14992)e-09=60.86psec
- **Cell fall delay**
- Time taken by output to fall to 50% and input to rise to 50%
- 
-![VirtualBox_vsdworkshop_07_08_2024_19_32_08](https://github.com/user-attachments/assets/54cd877e-5526-4c80-a552-7533968c8a09)
+![VirtualBox_vsdworkshop_01_08_2024_20_30_39 -Rise time(2 24-2 18)](https://github.com/user-attachments/assets/61afadca-542a-4277-93c2-95fc8b91b555)  
+so, rise time= (2.24609 - 2.18215)e-09 = 63.94 psec.  
+**Fall time**  
+it is the time take by output for transition from 80% to 20%.  
+![fall time 4 095-4 59](https://github.com/user-attachments/assets/675d8253-1006-42eb-91b1-8f7a05f5ccd2)  
+so, fall time= (4.09515 - 4.05269)e-09 = 42.46 psec  
+**Propagation delay**  
+it is the time difference between the 50% of input and 50% of the output.  
+![VirtualBox_vsdworkshop_01_08_2024_20_42_57 prop delay(2 21-2 15) - Copy](https://github.com/user-attachments/assets/3bc518c0-aa14-4795-8028-6ab2c5bddda5)  
+so, propogation delay =(2.21086 - 2.15)e-09 = 60.86 psec.  
+**Cell rise delay**  
+Time taken by output to rise to 50% and input to fall to 50%  
+![VirtualBox_vsdworkshop_07_08_2024_19_31_06](https://github.com/user-attachments/assets/1e5fdf56-a6e5-42cd-9263-d71209b4c590)  
+so,cell rise delay=(2.21078-2.14992)e-09=60.86psec  
+**Cell fall delay**  
+Time taken by output to fall to 50% and input to rise to 50%    
+![VirtualBox_vsdworkshop_07_08_2024_19_32_08](https://github.com/user-attachments/assets/54cd877e-5526-4c80-a552-7533968c8a09)  
 so,cell fall delay=(4.07586-4.04914)e-09=26.72psec
 
 
