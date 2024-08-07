@@ -365,3 +365,11 @@ Final layout after powerplaning
 
 Let's put this netlist in the core which we have designed before and let's try to fill this empty area between core and die with the pin information. The frontend team who decides the netlist connectivity input and output and the backend team who done the pin placements. So according to the pin placements, we have to locate the preplaced blocks nearer to the inputs of the preplaced blocks.
  ![placement2](https://github.com/user-attachments/assets/b1736e81-b1ab-44f6-8eac-210d3052af5c)
+ **Section 2 tasks**:-
+
+* Run 'picorv32a' design floorplan using OpenLANE flow and generate necessary outputs.
+* Calculate the die area in microns from the values in floorplan def.
+* Load generated floorplan def in magic tool and explore the floorplan.
+* Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.
+* Load generated placement def in magic tool and explore the placement.
+
