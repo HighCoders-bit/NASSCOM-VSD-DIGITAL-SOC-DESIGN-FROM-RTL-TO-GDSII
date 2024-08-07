@@ -295,7 +295,7 @@ A 'Core is the section of the chip where the fundamental logic of the design is 
 
 ![Screenshot 2024-07-14 190020](https://github.com/user-attachments/assets/db93edb1-d8b1-45d2-aa7d-6acf6b273c82)
 
-So, utilization factor = 1 (It means core has utilized all the area and no spane left)
+So, utilization factor = 1 (It means core has utilized all the area and no space left)
 
 Aspect Ratio = Height / width = 2 unit / 2unit = 1
 
@@ -303,9 +303,22 @@ Whenever Aspect Ratio is 1 it signifies that chip is square shaped. When it is n
 
 
 ![Screenshot 2024-07-14 190124](https://github.com/user-attachments/assets/3aa33460-91cf-431d-8f84-8bd793f2c294)
-So, utilization factor = 1 (It means core has utilized all the area and no spane left)
 
-Aspect Ratio = Height / width = 2 unit / 2unit = 1
+Lets take another example for a square chip wth dimensions 4*4 sq units. We will get utilization factor= 0.25 it means out of the whole chip area only 25% area is utilized by the netlistand 75% is available for additional cells which can be use for routing in which we will have layering. Aspect ratio we get = 1 it means chip is square in shape.
 
-Whenever Aspect Ratio is 1 it signifies that chip is square shaped. When it is not 1 it means the chip is in rectangular shape.
+**PREPLACED CELL**:ets take a combinational logic which does some amount of function and assume its a huge circuit having some N Logic gates so let's devide it into some small numbers of gates. We will cut the whole circuit into two parts, and separate both of them into two blocks and both block will be implemented seperately.
 
+![PREPLACED](https://github.com/user-attachments/assets/0255b67b-60ea-44bf-80d0-0b298c8086a9)
+
+![PREPLACED1](https://github.com/user-attachments/assets/e21d2a87-a487-484b-a0f2-b52d0f417ea9)
+
+In both the blocks lets extend the input output pins and now we will black box the boxes and detached them. After black boxing, the upper portion is invisible from the top or invisible to the one , who is looking into the main netlist. now will seperate them out as two different IP's or modules.
+
+Advantage of doing this is we can reuse them multiple times after implimenting once only. Similary there are other IP's also available for eg. Memory, Clock-gating cell, Comporator, MUX all of these are part of the top level netlist.They recieve some signals and perform functions and deliver the outputs but the functionality of the cell is implemented only once.
+
+![PREPLACED 2](https://github.com/user-attachments/assets/6a6b746e-b33e-419c-b63f-b762f8266956)
+The arrangement of these IP's in a chip is refferd as floorplanning.
+
+These IP's have user-defined locations, and hence are placed in chip before automated placement and routing are called "pre-placed cells".
+
+These cells are placed in such a way that, the placement and routing tool do not touch the location of the cell.
