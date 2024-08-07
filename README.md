@@ -661,10 +661,10 @@ Section 3 tasks:-
 * Spice extraction of inverter in magic.
 * Editing the spice model file for analysis through simulation.
 * Post-layout ngspice simulations.
-* Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
-  **Clone custom inverter standard cell design from github repository**
-  ```bash
-  # Change directory to openlane
+* Find problem in the DRC section of the old magic tech file for the skywater process and fix them
+**Clone custom inverter standard cell design from github repository**
+```bash
+# Change directory to openlane
 cd Desktop/work/tools/openlane_working_dir/openlane
 
 # Clone the repository with custom inverter design
@@ -687,3 +687,68 @@ magic -T sky130A.tech sky130_inv.mag &
 ![VirtualBox_vsdworkshop_01_08_2024_00_41_35](https://github.com/user-attachments/assets/e3b89cd4-052d-433a-afa8-b372b5a906f3)
 
 **Load the custom inverter layout in magic and explore**
+
+![VirtualBox_vsdworkshop_01_08_2024_00_45_14](https://github.com/user-attachments/assets/47c93a7a-8041-4b88-9966-f2658537262b)
+![VirtualBox_vsdworkshop_01_08_2024_17_16_05](https://github.com/user-attachments/assets/603f96e9-c00b-4b27-9a77-cbf0fc46c165)
+![VirtualBox_vsdworkshop_01_08_2024_17_16_59](https://github.com/user-attachments/assets/108237f3-0752-4703-ad10-a57ebdc342f6)
+![VirtualBox_vsdworkshop_01_08_2024_17_33_28](https://github.com/user-attachments/assets/3536373f-4828-46a4-b404-871d48b667b7)
+**Spice extraction of inverter in magic**
+```bash
+# Check current directory
+pwd
+
+# Extraction command to extract to .ext format
+extract all
+
+# Before converting ext to spice this command enable the parasitic extraction also
+ext2spice cthresh 0 rthresh 0
+
+# Converting to ext to spice
+ext2spice
+```
+
+![VirtualBox_vsdworkshop_01_08_2024_17_37_13](https://github.com/user-attachments/assets/fd98cec8-76b7-412c-9d42-0194535ec1ed)
+![VirtualBox_vsdworkshop_01_08_2024_17_40_06](https://github.com/user-attachments/assets/8b7c0171-0460-4f37-8f67-6ba8e8962184)
+**create spice file and necessary modifications to be made according to our spice deck**
+
+![VirtualBox_vsdworkshop_01_08_2024_17_43_07](https://github.com/user-attachments/assets/cee7a963-9bc1-4ac3-b907-b9e8712ec372)
+![VirtualBox_vsdworkshop_01_08_2024_19_59_55-correct correct](https://github.com/user-attachments/assets/bd2c12ec-068b-492d-aac7-9fbc098bbbd3)
+**post-layout ngspice simulation**
+```bash
+# Command to directly load spice file for simulation to ngspice
+ngspice sky130_inv.spice
+
+# Now that we have entered ngspice with the simulation spice file loaded we just have to load the plot
+plot y vs time a
+```
+![VirtualBox_vsdworkshop_01_08_2024_20_01_26](https://github.com/user-attachments/assets/2cefd190-8555-471c-b709-b24be3350827)
+![VirtualBox_vsdworkshop_07_08_2024_19_01_06](https://github.com/user-attachments/assets/0a881800-b855-43ec-b7d3-ff40a2161108)
+**Rise time**
+It is time taken to the output waveform to 20% value to 80% value.
+![VirtualBox_vsdworkshop_01_08_2024_20_30_39 -Rise time(2 24-2 18)](https://github.com/user-attachments/assets/61afadca-542a-4277-93c2-95fc8b91b555)
+so, rise time= (2.24609 - 2.18215)e-09 = 63.94 psec.
+**Fall time**
+it is the time take by output for transition from 80% to 20%.
+
+![fall time 4 095-4 59](https://github.com/user-attachments/assets/675d8253-1006-42eb-91b1-8f7a05f5ccd2)
+so, fall time= (4.09515 - 4.05269)e-09 = 42.46 psec
+ **Propagation delay**
+ it is the time difference between the 50% of input and 50% of the output.
+
+![VirtualBox_vsdworkshop_01_08_2024_20_42_57 prop delay(2 21-2 15) - Copy](https://github.com/user-attachments/assets/3bc518c0-aa14-4795-8028-6ab2c5bddda5)
+
+so, propogation delay =(2.21086 - 2.15)e-09 = 60.86 psec.
+**Cell rise delay**
+Time taken by output to rise to 50% and input to fall to 50%
+![VirtualBox_vsdworkshop_07_08_2024_19_31_06](https://github.com/user-attachments/assets/1e5fdf56-a6e5-42cd-9263-d71209b4c590)
+
+so,cell rise delay=(2.21078-2.14992)e-09=60.86psec
+ **Cell fall delay**
+ Time taken by output to fall to 50% and input to rise to 50%
+ 
+![VirtualBox_vsdworkshop_07_08_2024_19_32_08](https://github.com/user-attachments/assets/54cd877e-5526-4c80-a552-7533968c8a09)
+so,cell fall delay=(4.07586-4.04914)e-09=26.72psec
+
+
+
+
