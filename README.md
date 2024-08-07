@@ -247,16 +247,18 @@ run_synthesis
 
 #### After synthesis is done we will see the results of synthesis both in docker winodw and also in openlane directory under synthesis
 
-![8](https://github.com/user-attachments/assets/5e3e46c8-e1f8-4643-bfc3-81448cbdb422)
+![7](https://github.com/user-attachments/assets/b24e9813-a9ea-452e-8410-82dbcfb0357e)
+
 #### RESULTS  
 **FLOP RATIO =** $\frac{1613}{14876} = 0.1084$  
-**Percentage** = $\0.1084 \times 100= 10.84$
+**Percentage** = $ 0.1084 \times 100= 10.84$
 
 ![VirtualBox_vsdworkshop_29_07_2024_15_59_09](https://github.com/user-attachments/assets/b6c74da4-3f14-4a33-adb6-acd7bb58439b)
 
 
 ![VirtualBox_vsdworkshop_29_07_2024_16_10_34](https://github.com/user-attachments/assets/e73f062b-cb9f-476d-bade-01242389da61)
 
-![VirtualBox_vsdworkshop_29_07_2024_16_14_06](https://github.com/user-attachments/assets/7985b6f4-e94e-4313-8a44-1bcb8d8b5375)
+
+![8](https://github.com/user-attachments/assets/1b05cbce-dd0e-4aca-b327-bce415128c87)
 
 #### In the end we see that the synthesis results in docker window and openlane directory matches
