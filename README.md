@@ -322,3 +322,46 @@ The arrangement of these IP's in a chip is refferd as floorplanning.
 These IP's have user-defined locations, and hence are placed in chip before automated placement and routing are called "pre-placed cells".
 
 These cells are placed in such a way that, the placement and routing tool do not touch the location of the cell.
+**DE-COUPLING CAPACITORS**:Let consider same circuit, which is the part of the blocks which has been described earlier. When some gate (let consider AND gate) switched from 0 to 1 or 1 to 0, considered amount of the switching current required because of available small capacitance . This capacitor should be completely charged to represent logic 1 and completly discharged to represent logic 0. Consider capacitance to be 0. Rdd,Ldd,and Lss are well defined values. During switching operation, the circuit demands switching current i.e. peak current. Now, due to the presence of Rdd and Ldd, there will be a voltage drop across them and the voltage at Node 'A' would be Vdd' instead of Vdd.
+
+![Decap](https://github.com/user-attachments/assets/eff069ce-0e01-41ae-af22-b0ec4a416168)
+
+![Untitled](https://github.com/user-attachments/assets/146a87ec-3889-4a87-9def-5cdeff10da1e)
+
+So, due to this if ideal logic 1 = 1 volt then here practically it can be less then 1 volt i.e., 0.97 volts (Vdd'). So, for any signal to be considered as Logic '0' and '1' in the NM low and NM high range. It is danger case.
+
+
+![noise margin](https://github.com/user-attachments/assets/1d1253c5-0f7e-47c7-99c0-2f7cfd738bd2)
+To solve this problem,, we have to put De-coupling capacitor in parallel with the circuit. Every time the circuit switches, it draws current from Cd, whereas, the RL network is used to replenish the charge into Cd. And the amount of current needed for the circuit is supplied by the De- Coupling Capacitor.
+
+![decap 2](https://github.com/user-attachments/assets/0dd04fd1-c44b-435c-9475-8de79e9d649b)
+
+In the chip it will look something like shown below Decoupling capacitors are placed in between the block a, block b and block c. So here in this whole block it has been ensured that supply is being done by the de-coupling capacitor. Once we are done with this we have taken care of the local communication.
+ **Power planning**:Now let's consider that local circuitory and keep it as a black box and it can be repeat multiple times and there is some logic present at the boundaries also and the problem of current demand was solved by de-coupling capacitor. There is signal which is send from driver to load and the signal is basically logic 0 to logic 1. Here we need to maintain the particular driver to load line with same signal so that the load recieves the same. Now power supply is applied. Now assume 16 bit bus has to retain the same signal from driver to the load. so it should get the sufficient power from the supply. But at this bus, there is no de-coupling capacitor is available because it is not physible to put capacitor at all over the place. now, power supply is far away from the bus, that is why some voltage drop between them will occur definetly.
+ 
+![power planning](https://github.com/user-attachments/assets/6915b809-ca34-4bcf-93bd-48a0f57c8516)
+
+When we say one particular line of 16-bit bus is logic 1 it says that the capacitor is being charged to Vdd, and whenever we say logic 0 it says that the capacitor is discharged to ground.Let consider this 16 bit bus connected to inverter. So, all the capacitor are initially charged will get discharged and vice-versa due to inverter.  
+
+But the problem is occurs due to all capacitor is connected to the single ground. This will cause a bump in 'ground' tap point during discharging. That bump is called as Ground Bounce. If the size of the bump exceeds the noise margin levelit might enter into an undefined state and due to undefined state it can either go to logic 1 or logic 0. So here thing becomes unpredictable
+ 
+![powerplan1](https://github.com/user-attachments/assets/f5e5a0d4-ae27-4b61-a00c-dd821a299747)
+
+Also , all capacitors which were'0' volts will have to charge to 'V'volts through single 'vdd'tap point. This will cause lowering of voltage at Vdd tap point. As long as this voltage drop is in noise margin level we are good enough but if it goes into an undefined region then things become unpredictable.
+
+
+![powerplan 3](https://github.com/user-attachments/assets/fb35204a-6a68-4ca9-97bd-8caa9903e02f)
+
+The phenomenon we have seen was causing the lowering of the supply voltage,this problem occured because power has applied to one point only. The solution of the problem is use multiple power supply. So, every block will take charge from neartest power supply and similarly dump the charge to the nearer ground. this type of power supply is called mesh.
+
+![powerplan4](https://github.com/user-attachments/assets/ad9105e0-e904-4f0c-a58e-6b69b869675d)
+Final layout after powerplaning
+
+![powerplan5](https://github.com/user-attachments/assets/3e8c9aeb-78b1-48a2-b24c-5962c8898236)
+**Pin placement and logical placement blockage**:This types of circuits are very much helpful to understand the timing analysis of inter clocks. now complete design becomes like given below which has 6 input ports and 5 output ports. The connectivity information between the gates is coded using VHDL/Verilog language and is called as 'Netlist'.
+
+
+![placement1](https://github.com/user-attachments/assets/e6984201-2751-44d5-9ab7-2bc9d812a819)
+
+Let's put this netlist in the core which we have designed before and let's try to fill this empty area between core and die with the pin information. The frontend team who decides the netlist connectivity input and output and the backend team who done the pin placements. So according to the pin placements, we have to locate the preplaced blocks nearer to the inputs of the preplaced blocks.
+ ![placement2](https://github.com/user-attachments/assets/b1736e81-b1ab-44f6-8eac-210d3052af5c)
