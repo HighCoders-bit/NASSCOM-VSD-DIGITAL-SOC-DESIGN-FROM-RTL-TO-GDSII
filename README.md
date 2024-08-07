@@ -374,3 +374,55 @@ Let's put this netlist in the core which we have designed before and let's try t
 * Load generated placement def in magic tool and explore the placement.
   
 ***Area of die in microns=Die width in microns * Die height in microns***
+**Previously we have invoke the OPENLANE using docker method and run the floorplan**
+```bash
+run_floorplan
+```
+Before run the floorplanning, we required some switches for the floorplanning.We can get from the configuration from openlane.
+
+![VirtualBox_vsdworkshop_29_07_2024_16_24_48](https://github.com/user-attachments/assets/b2a09723-b496-48e5-ac1a-0d4bdb065ec0)
+![VirtualBox_vsdworkshop_29_07_2024_16_25_43](https://github.com/user-attachments/assets/27045311-1c5f-4ad4-80bf-431c949a98ff)
+
+Here we can see that the core utilization ratio is 50% (bydefault) and aspect ratio is 1 (bydefault). similarly other information is also given. But it is not neccessory to take these values. we need to change these value as per the given requirments also.
+![VirtualBox_vsdworkshop_29_07_2024_16_28_03](https://github.com/user-attachments/assets/fa865f19-b179-4dc8-a24e-e5a0f6b4e8ad)
+
+![VirtualBox_vsdworkshop_29_07_2024_16_28_03](https://github.com/user-attachments/assets/bb2fabdf-67d4-43ec-90a2-adddd04730de)
+Here FP_PDN files are set the power distribution network. These switches are set in the floorplane stage bydefault in OpenLANE.  
+Here, (FP_IO MODE) 1, 0 means pin positioning is random but it is on equal distance.
+
+In the OpenLANE lower priority is given to system default (floorplanning.tcl), the next priority is given to config.tcl and then priority is given to PDK varient.tcl (sky130A_sky130_fd_sc_hd_congig.tcl).
+
+Now we see, with this settings how floorplan run.
+
+![VirtualBox_vsdworkshop_29_07_2024_16_36_12](https://github.com/user-attachments/assets/f2eab3fb-6bd3-48d3-aff9-81e0081fe59f)
+![VirtualBox_vsdworkshop_29_07_2024_16_36_32](https://github.com/user-attachments/assets/2d51b5cc-24c4-405e-ae20-4445adef5822)
+**Calculate the die are in microns**
+
+![VirtualBox_vsdworkshop_29_07_2024_16_51_49](https://github.com/user-attachments/assets/cec32260-d0b0-4e37-9bed-53e6b95b2ae8)
+$$
+100 \text{ unit distance} = 1 \text{ micron}
+$$
+
+$$
+\text{Die width in unit distance} = 660,685 - 0
+$$
+
+$$
+\text{Die height in unit distance} = 671,405 - 0
+$$
+
+$$
+\text{Distance in micron} = \frac{\text{Value in unit distance}}{1000}
+$$
+
+$$
+\text{Die width in micron} = \frac{66,685}{1000}
+$$
+
+$$
+\text{Die height in micron} = \frac{671,405}{10,000}
+$$
+
+$$
+\text{Area of die in micron} = 660.685 \times 671.405 = 443,587.212425 \text{ square microns}
+$$
