@@ -274,5 +274,38 @@ So, area= 1 Sq. units
 Asuume same area for the flipflop as well = 1 Sq. units
 
 with help of these dimensions and netlist let's calculate the area occupied by the netlist on a silicon wafer.
+ 
 
+![Screenshot 2024-07-14 185039](https://github.com/user-attachments/assets/71c0f3f9-31af-4f8e-b9ea-0830dc8c79e2)  
+Befor that will remove all the wires and bring all the flip flops and logic gates in a single plate. So after combining them together width and length will be 2 Sq. units each and if we calculate the total area the it will be 4 Sq. units. So now we have the rough calculation of minimum area occupied by the netlist.  
+
+What is 'Core' and 'Die' section of a chip?
+
+Let's have a silicon wafer on which all the logics are implemented. In thes one section is refered as 'Die' and inside the Die we have the Core.
+
+A Die which consists of core, is small semicondcutor material specimen on which the fundamental circuit is fabricated.
+
+A 'Core is the section of the chip where the fundamental logic of the design is placed.
+
+
+![Screenshot 2024-07-14 185715](https://github.com/user-attachments/assets/f2bca0e2-ff97-436d-8b25-f0a4a724f2a8)
+
+![Screenshot 2024-07-14 185900](https://github.com/user-attachments/assets/4a615c03-5515-4255-9f17-89c2c9a6f1a2)
+
+
+![Screenshot 2024-07-14 190020](https://github.com/user-attachments/assets/db93edb1-d8b1-45d2-aa7d-6acf6b273c82)
+
+So, utilization factor = 1 (It means core has utilized all the area and no spane left)
+
+Aspect Ratio = Height / width = 2 unit / 2unit = 1
+
+Whenever Aspect Ratio is 1 it signifies that chip is square shaped. When it is not 1 it means the chip is in rectangular shape.  
+
+
+![Screenshot 2024-07-14 190124](https://github.com/user-attachments/assets/3aa33460-91cf-431d-8f84-8bd793f2c294)
+So, utilization factor = 1 (It means core has utilized all the area and no spane left)
+
+Aspect Ratio = Height / width = 2 unit / 2unit = 1
+
+Whenever Aspect Ratio is 1 it signifies that chip is square shaped. When it is not 1 it means the chip is in rectangular shape.
 
