@@ -17,10 +17,10 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
    * [D2 SK2 Library binding and placement](#d2-sk2-library-binding-and-placement)
    * [D2 SK3 Cell design and characterization flows](#d2-sk3-cell-design-and-characterization-flows)
    * [D2 SK4 General timing characterization](#d2-sk4-general-timing-characterization)
- * [Day 3 Design library cells using magic layout and ngspice characterization](day-3-design-library-cells-using-magic-layout-and-ngspice-characterization)
-    * [D3 SK1 Labs for CMOS Inverter and ngspice simulation](d3-sk1-labs-for-cmos-invereter-and-ngspice-simulation)
-    * [D3 SK2 Inception of layout and CMOS fabrication process](d3-sk2-inception-of-layout-and-CMOS-fabrication-process)
-    * [D3 SK3 Sky130 Tech File labs](d3-sk3-sky130-tech-file-labs)
+ * [Day 3 Design library cells using magic layout and ngspice characterization](#day-3-design-library-cells-using-magic-layout-and-ngspice-characterization)
+    * [D3 SK1 Labs for CMOS Inverter and ngspice simulation](#d3-sk1-labs-for-cmos-invereter-and-ngspice-simulation)
+    * [D3 SK2 Inception of layout and CMOS fabrication process](#d3-sk2-inception-of-layout-and-CMOS-fabrication-process)
+    * [D3 SK3 Sky130 Tech File labs](#d3-sk3-sky130-tech-file-labs)
  * [DAY 4 Prelayout timing analysis and importance of good clock tree](day-4-prelayout-timing-analysis-and-importance-of-good-clock-tree)
     * [D4 SK1 Timing modelling using delay tables](d4-sk1-timing-modelling-using-delay-tables)
     * [D4 SK2 Timing analysis using ideal clock using openSTA](d4-sk2-timing-analysis-using-ideal-clock-using-opensta)
@@ -586,9 +586,22 @@ Next step is to feed in all this inputs from 1 to 8 in a form of a configuration
 Time for a signal to propagate through a circuit element.
 Measured at the 50% points of input and output transitions.
 Affects circuit speed.
+
+
+
+
 **Transition Time**:
 
 Time for a signal to transition between voltage levels.
 Rise time (tr): 10% to 90% transition.
 Fall time (tf): 90% to 10% transition.
 Affects signal integrity and performance.
+## Day 3 Design library cells using magic layout and ngspice characterization
+###  D3 SK1 Labs for CMOS Inverter and ngspice simulation
+### IO PLACER REVISIOM
+Till now, we have done floor planning and run placement also. But if we want to change the floorplanning, for example, in our floor planning, pins are at equal distance and if we want to change it then we can also make it by ```bash Set ``` command.
+
+For that first we have to check the swithes in the configuration and from that we have to take the syntax "env(FP_IO_MODE) 1". and make it to the "env(FP_IO_MODE) 2". then again run the floorplanning.
+
+Then check the changes in the pins location through magic -T.
+
