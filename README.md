@@ -744,9 +744,10 @@ so,cell rise delay=(2.21078-2.14992)e-09=60.86psec
 Time taken by output to fall to 50% and input to rise to 50%    
 ![VirtualBox_vsdworkshop_07_08_2024_19_32_08](https://github.com/user-attachments/assets/54cd877e-5526-4c80-a552-7533968c8a09)  
 so,cell fall delay=(4.07586-4.04914)e-09=26.72psec
+## D3 SK3 Sky130 Tech File labs
 **Find problem in the DRC section of the old magic tech file for the skywater process and fix them**
-To know more about the Magic DRC we can go to the website:-[The Magic Technology File Manual - DRC Section](http://opencircuitdesign.com/magic/Technologyfiles/TheMagicTechnologyFileManual/DrcSection)  
-Link to Google_Skywaters Design Rules: -   [SkyWater PDK Documentation - Periphery Rules](https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html)
+To know more about the Magic DRC we can go to the website:-[The Magic Technology File Manual - DRC Section](http://opencircuitdesign.com/magic/Technologyfiles/TheMagicTechnologyFileManual/DrcSection)    
+Link to Google_Skywaters Design Rules: -   [SkyWater PDK Documentation - Periphery Rules](https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html)  
 For reference , we can use the github repo of Google-Skywater:[SkyWater PDK GitHub Repository](https://github.com/google/skywater-pdk)
 **Commands used**
 ```bash
