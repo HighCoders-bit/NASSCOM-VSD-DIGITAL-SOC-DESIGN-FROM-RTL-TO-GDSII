@@ -512,3 +512,64 @@ cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/29-07
 # Command to load the placement def in magic tool
 magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
 ```
+
+![VirtualBox_vsdworkshop_29_07_2024_20_54_40](https://github.com/user-attachments/assets/283ef591-b336-4dbe-af7a-888192fc9422)
+
+![VirtualBox_vsdworkshop_07_08_2024_13_31_27](https://github.com/user-attachments/assets/9a2b31c9-9d4b-45eb-b046-a08a408f2383)
+##  Cell design and characterization flows
+### Inputs for cell design flow
+In Cell Design Flow, Gates, flipflops, buffers are named as 'Standard Cells'. These standard cells are being placed in the section called as 'Library'.And in the library many other cells are available which have same functionality but the size is different.
+
+
+![celldesign](https://github.com/user-attachments/assets/b0d61c52-0592-4a12-a826-a9ae56ea0581)
+![celldesign1](https://github.com/user-attachments/assets/4af40978-cc92-48dd-9c0c-cab8bfd5d646)
+
+If you look into one of the inverter from the library the cell design flowis as follows
+
+The inverter has to represented in form of the shape, drive strength, power charracteristic and so on. Here cell design flow is devided into three parts.
+
+* Inputs
+
+* Design steps
+
+* Outputs
+  
+![celldesign2](https://github.com/user-attachments/assets/90dde6df-82a4-40cf-b71e-8d60ae9e723a)
+### Circuit design Steps
+![circuitdesign1](https://github.com/user-attachments/assets/badc98cc-6aa5-49a5-b1a4-f0ab80fcf010)
+
+In circuit Design there are two steps.
+
+First step is to implement the function itself and second step is to model the PMOS nad NMOS transistor in such a fashion in order to meet the libraray.
+
+**Outputs**
+
+The typical output what we get from the circuit design is CDL(circuit description language) file,GDSII,LEF,extracted spice netlist(.cir).
+### Layout design steps
+
+
+![layoutdesign](https://github.com/user-attachments/assets/91c7eb7a-7fa0-47d9-91da-8405b999fca2)
+In Layout Design First step is to get the function implemented through the MOS transistor through a set of PMOS and NMOS transistor and the second step is to get the PMOS network graph and the nNMOS network graph out of the design that has been implemented.
+
+![eulerpath](https://github.com/user-attachments/assets/f336c1a7-9bcc-47bd-85bf-e177302dd5c7)
+After getting the network graphs next step is to obtain the Euler's path. Eule's path is basically the path which is traced only once.
+
+![stickdiagram](https://github.com/user-attachments/assets/f525bd4d-f53f-4bb9-bfe0-24e19434f50f)
+Next step is to draw stick diagram based on the Euler's path. This stick diagram is derived out of the circuit diagram.
+![eulerpath to layout](https://github.com/user-attachments/assets/73680847-e784-47cb-b2d8-6ff7953d5ddf)
+
+Next step is to convert this stick diagram into a typical Layout, into a proper layout and then get the proper rule we have discissed earlier. Once we get the particular layout then we have the cell width, cell length and all the specifications will be there like drain current, pin locations and so on.
+
+Next and Final step is to extract the parasatics of that particular layout and charaterise it in terms of timing. So before that the output of the layout design will be GDSll. Once you get the extracted spice netlist then we characterize it. Characterization helps in getting timing, noise and power information.
+### Typical characterization flow
+
+Let's try to build the characterization flow based on the inputs we have,
+
+First step is to read in the model, second step is to read the extracted spice netlist, third step is to define or recognize the behaviour of the buffer, fourth step is to read the subcircuits of the inverter and then in the fifth step need to attach the necessary power supplies, sixth step is to apply the stimulus then in the seventh step we need to provide the necessary output capacitance then in the final eighth step in which we need to provide necessary simulation command for example if we are doing transent simulation so we need to give .tran command , if we are doing DC simulation then we give .dc command.
+Next step is to feed in all this inputs from 1 to 8 in a form of a configuration file to the characterization software "GUNA" .
+
+![characterizationflow](https://github.com/user-attachments/assets/b460206e-09f7-4c52-a8e7-03c4cacb263b)
+## D2 SK4 General timing characterization
+![timing](https://github.com/user-attachments/assets/6be06b3a-4be8-4212-8465-b9b06fb7572f)
+
+
