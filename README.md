@@ -440,3 +440,63 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 ![VirtualBox_vsdworkshop_29_07_2024_19_15_03](https://github.com/user-attachments/assets/92323cb5-b153-4dfa-878e-1638c99c3597)
 ![VirtualBox_vsdworkshop_29_07_2024_19_27_26](https://github.com/user-attachments/assets/7d7ba099-ea31-497a-8b86-207430cab598)
 ![VirtualBox_vsdworkshop_29_07_2024_19_28_21](https://github.com/user-attachments/assets/9fcf975f-1763-47dc-980e-b6ed211d5aeb)
+## D2 SK2 Library binding and placement
+### Netlist binding and initial place design 
+**Build netlist with physical cells**: ets we have the netlist of gates and shape of these gates represents the functionality of this gates. Foe example we have NOT gate as a tringular shape but in reality it is a box with physical dimensions it has width and height.Similarly for AND gate it also has a box shape in reality, Flipfops are also square boxes.So, we have given the physical dimensions to all the gates and flipflops. For everycomponent of the netlist we will give the particular shape with particular dimensions because ir real world the shapes like AND,OR gates does not exists so we make them as square all the blocks also have the width and height and proper shape.
+
+![buildnetlist](https://github.com/user-attachments/assets/d1749ba1-7ece-448d-9bf6-e4db6752eedc)
+
+Now we will remove the wires,all the gates, flipflops and blocks are present in the shelf which is called as Library.
+
+A library is a place where you can find all kind of books all the gates,f/f are books here. Library also has the timing information of the perticular book like delay of the gates. Library can be devides into two sublibraries, One library consist of shape and size and other library might consist only of the delay information. Library has the various flavours of each and every cell. Like same cell can have bigger in size in different self, bigger the size of cell lesser the resestnce path so it will work faster and will have lesser delay. We can pick up from these what we want based on the timing condition and available space on the floorplan.
+
+
+
+![buildnetlist2](https://github.com/user-attachments/assets/3bb1daa0-0201-4953-b7aa-1a41f1136dc5)
+
+**Placement**:Once we have given proper shape and size to each and every gates the next step is to take those particular shapes ans sizes and place it on the floorplan. We have the floorplan with inout and output ports, we have particular netlist, and we have particular size given to each component of this netlist. So we have the physical view of the logic gates. Next step is to place the netlist onto the floorplan. We have to take the connectivity information from the netlist and design the physical view gates on the floorplan.
+
+
+![buildnetlist3](https://github.com/user-attachments/assets/97686f59-0e4c-4024-bf7b-d7ef6c2ee1cd)
+Now, we have the floorplan where we have the preplaced cells from the previous slides, Placement will make sure that the pre placed cells locations are not affected they are kept as it as and the second thing which will be taken care of that is no cell should be placed over the pre-placed cells. We need to place the physical view of the netlist onto the floorplan in such a fashion that logical connectivity should be maintained and that particular circuit should interact with their input and output ports to maintain the timing and the delay will be minimal.
+
+![buildnetlist4](https://github.com/user-attachments/assets/3d13f68b-5cc6-414f-a793-a7055d7db72f)
+### Optimize placement using estimated wirelength and capacitence
+**Optimize Placement**: In optimize placement we will resolve the problem of distancing.Lrt's take the example of FF1 to Din2. There must be a wire going from Din2 to FF1 but before going into routing the desing or wiring we will try to estimate the capacitances. If we lokk the capacitance from Din2 to FF1 it is every huge because wire length is huge in that case even the resutance will also be huge because of that length. If we send the signal from Din2 then it will be difficult for FF1 to catch that input because distance is large. So we can place some intermediate steps to maitain the Signal integrity. By this the input is succesfully driven to the FF1 from Din2. These intermediate steps are called here Repeaters , Repeaters are basically buffers that will recondition the original signal and make a bew signal which replicate the original signal and send it forward this process repeates untill we reach to the actual cell where we want to send the input in this way signal integrity is maintained. By using repeaters we resolve the problem of signal integrity but there will be a loose of area because more and more repeaters are used more area will be used of the particular floorplan.  
+![optplace](https://github.com/user-attachments/assets/97a4d26d-105d-4fce-afc7-3e43db445331)
+
+Stage 4 is bit tricky as compared to other stages.Now we have to check that, what we have done is correct or not. For that we need to do Timing analysis by considering the ideal clocks and according to the data of analysis, we will understand that, the placement is correct or not.
+
+
+![optplace1](https://github.com/user-attachments/assets/11d7b140-1f9b-4624-9e6a-9314e9fddba6)
+### Need for libraries and characterization 
+Every ICdesign Flow needs to go through the several steps. First step to go through is Logic Synthesis, let's say if we have a functionality which is coded in a form of an RTL so first we need to convert the functionality into legal hardware is refered to as Logic Synthesis. Ouput of the logic synthesis is arrangement of gates that will represent the original functionality that has been described using an RTL. Next step of logic synthesis is Floorplaning, in this we omport the output of logic synthesis and decide the size of the Core and Die. The next step after floorplaning is Placement, in this we take the particular logic cell send place them on the chip in such a fashion that initial timing is better. Next step is CTS(Clock tree synthesis), in this we take care that clk should reach each and every signal at the same time also take care of each clk signal has equal rise and fall.Next step is Routing, routing has to go through the certain flow dependendent on the characterization of the flip flop.And now comes the last step STA(Static timing analysis), in this we try to see the set up time, hold time, maximum achieved frequency of the circuit. One common thing across all stages 'GATES or Cells'.
+### Congestion aware placement using RePlAce
+In digital design, placement refers to the process of positioning standard cells or blocks on a chip. The RePlAce tool provides a method for congestion-aware placement, focusing on both global and detailed placement stages.
+
+**Global Placement**
+Global Placement is the initial stage of placement where the goal is to place cells or blocks approximately in the chip area, ensuring that:
+
+* **Overall Design Constraints**: The cells are roughly placed considering overall area constraints and design rules.
+* **Congestion Management**: This stage aims to minimize routing congestion by spreading cells evenly and avoiding high-density regions.
+* **Optimization**: The placement is optimized for wirelength, signal delay, and other high-level factors without focusing on precise cell placement.
+ **Key Aspects of Global Placement**:
+
+* **Early Estimation of Congestion**: Provides an initial estimate of congestion that helps in further refinement.
+* **Algorithmic Approach**: Uses algorithms to approximate optimal cell positions while considering the overall design layout.
+ **Detailed Placement**
+Detailed Placement follows global placement and focuses on fine-tuning cell positions to achieve the final design goals:
+
+* **Fine Adjustment**: Refines the positions of cells placed during the global placement to meet precise design rules and constraints.
+* **Local Congestion**: Reduction: Focuses on reducing local congestion and optimizing the cell arrangement to ensure efficient routing.
+* **Final Verification**: Ensures that the final placement meets all the design specifications, including timing, area, and power constraints.
+  **Key Aspects of Detailed Placement**:
+
+* **Precise Cell Location**: Adjusts cell positions to optimize local routing and meet specific design rules.
+* **Congestion Mitigation**: Addresses local congestion issues identified in the global placement phase by repositioning cells to balance routing density
+**Summary**
+Congestion-aware placement using RePlAce involves:
+
+* Global Placement: Rough positioning of cells with an initial focus on congestion.
+* Detailed Placement: Fine-tuning of cell positions to optimize local routing and meet design constraints.
+* RePlAce: A tool that integrates both global and detailed placement stages with a focus on managing and reducing congestion throughout the placement process.
