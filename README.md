@@ -494,9 +494,21 @@ Detailed Placement follows global placement and focuses on fine-tuning cell posi
 
 * **Precise Cell Location**: Adjusts cell positions to optimize local routing and meet specific design rules.
 * **Congestion Mitigation**: Addresses local congestion issues identified in the global placement phase by repositioning cells to balance routing density
-**Summary**
+  **Summary**
 Congestion-aware placement using RePlAce involves:
 
 * Global Placement: Rough positioning of cells with an initial focus on congestion.
 * Detailed Placement: Fine-tuning of cell positions to optimize local routing and meet design constraints.
 * RePlAce: A tool that integrates both global and detailed placement stages with a focus on managing and reducing congestion throughout the placement process.
+  ### Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs
+  ```bash
+  run_placement
+  ```
+![VirtualBox_vsdworkshop_29_07_2024_20_51_22](https://github.com/user-attachments/assets/796904d8-b85e-4a15-9513-c891725e5524)
+### Load placement.def in magic layout
+```bash
+# Change directory to path containing generated placement def
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/29-07_10-25/results/placement/
+# Command to load the placement def in magic tool
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+```
