@@ -598,7 +598,7 @@ Fall time (tf): 90% to 10% transition.
 Affects signal integrity and performance.
 ## Day 3 Design library cells using magic layout and ngspice characterization
 ###  D3 SK1 Labs for CMOS Inverter and ngspice simulation
-### IO PLACER REVISIOM
+### IO PLACER REVISION
 Till now, we have done floor planning and run placement also. But if we want to change the floorplanning, for example, in our floor planning, pins are at equal distance and if we want to change it then we can also make it by ``` Set ``` command.
 
 For that first we have to check the swithes in the configuration and from that we have to take the syntax "env(FP_IO_MODE) 1". and make it to the "env(FP_IO_MODE) 2". then again run the floorplanning.
