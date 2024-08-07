@@ -239,3 +239,16 @@ run_synthesis
 ![VirtualBox_vsdworkshop_29_07_2024_15_46_26](https://github.com/user-attachments/assets/a85da922-e167-4409-8103-0e9835778a81)
 
 ![VirtualBox_vsdworkshop_29_07_2024_15_50_49](https://github.com/user-attachments/assets/e2aca2fc-3098-4888-9338-8eea0ee8ca23)
+![VirtualBox_vsdworkshop_29_07_2024_15_55_11](https://github.com/user-attachments/assets/f9829f81-bd20-4099-b2ce-eaabe9f7ea8e)  
+
+
+![VirtualBox_vsdworkshop_29_07_2024_15_56_56](https://github.com/user-attachments/assets/1a7f7a7a-0667-4284-958e-b0c0a6a743a4)
+
+![VirtualBox_vsdworkshop_29_07_2024_15_59_09](https://github.com/user-attachments/assets/0e6c64c9-a19d-4ab8-8e49-8d53aa6080dc)
+
+#### After synthesis is done we will see the results of synthesis both in docker winodw and also in openlane directory under synthesis
+
+
+![VirtualBox_vsdworkshop_29_07_2024_16_06_40](https://github.com/user-attachments/assets/6e425126-0d22-4e53-9e5f-448b1ea9ac67)
+
+
