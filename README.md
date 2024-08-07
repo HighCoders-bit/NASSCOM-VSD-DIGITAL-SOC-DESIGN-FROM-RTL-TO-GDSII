@@ -605,3 +605,32 @@ For that first we have to check the swithes in the configuration and from that w
 
 Then check the changes in the pins location through magic -T.
 
+![VirtualBox_vsdworkshop_31_07_2024_20_13_46](https://github.com/user-attachments/assets/1166a339-3e8a-465e-ad57-c4395f6c3ee4)
+
+![VirtualBox_vsdworkshop_31_07_2024_20_15_27](https://github.com/user-attachments/assets/40c5e5e6-b46c-4481-88ba-03bcf283b8d4)
+![VirtualBox_vsdworkshop_31_07_2024_20_20_59](https://github.com/user-attachments/assets/2df1c719-d2a0-4e18-a310-74e1a7f4ba93)
+![VirtualBox_vsdworkshop_31_07_2024_20_21_34](https://github.com/user-attachments/assets/5951c7ba-60a5-4900-ad6d-99625863fb1a)
+![VirtualBox_vsdworkshop_31_07_2024_20_22_49](https://github.com/user-attachments/assets/cf967777-5ced-44a6-b1ec-42572b79a850)
+### SPICE DECK FOR CMOS INVERTER
+
+![ngspice](https://github.com/user-attachments/assets/8345700a-b0d2-4aa4-86f8-1abae27b634d)
+**Explaination**
+* **Component connectivity**:- In this we need to define the connectivity of the substrate pin. Substrate pin tunes the threshold voltage of the PMOS and NMOS.
+* **Component values**:- Values for the PMOS nad NMOS. We have taken the same size of both PMOS and NMOS.
+* **Identify the nodes**:- Node mean the points between which there is a component.These nodes are required to define the netlist.
+* **Name the nodes**:- Now we wiil name these nodes as Vin, Vss, Vdd, out.
+* **CONNECTIONS**:
+
+  * For M1 MOSFET drain is connected to out node, gate is connected to in node, PMOS transistor substrate and Source is connected to Vdd node.
+  * For M2 MOSFET drain is connected to out node, gate is connected to in node, NMOS source and substrate are connected to 0.
+  * CLOAD It is connected between out and the node 0. And it's value is 10ff
+  * Supply voltage(Vdd) which is connected between Vdd and node 0 and value of it is 2.5
+  * Similarly we have input voltage which is connected between Vin and node 0 and its value is 2.5.
+* **SIMULATION COMMANDS**:
+  Now we have to give the simulation commands in which we are swiping the Vin from 0 to 2.5 with the stepsize of 0.05. Because we want Vout while changing the Vin.
+* **Final modelling**:
+   Final step is to model files. It has the complete description about NMOS and PMOS. 
+   
+  
+ 
+
