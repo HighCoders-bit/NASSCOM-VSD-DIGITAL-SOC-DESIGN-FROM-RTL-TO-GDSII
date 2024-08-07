@@ -231,24 +231,32 @@ prep -design picorv32a
 run_synthesis
 ```
 
-  
-
-![VirtualBox_vsdworkshop_29_07_2024_15_40_48](https://github.com/user-attachments/assets/5987b99b-780d-4c5d-aa38-5d9d4d9f1d54)
-
-                                      
-![VirtualBox_vsdworkshop_29_07_2024_15_46_26](https://github.com/user-attachments/assets/a85da922-e167-4409-8103-0e9835778a81)
-
-![VirtualBox_vsdworkshop_29_07_2024_15_50_49](https://github.com/user-attachments/assets/e2aca2fc-3098-4888-9338-8eea0ee8ca23)
-![VirtualBox_vsdworkshop_29_07_2024_15_55_11](https://github.com/user-attachments/assets/f9829f81-bd20-4099-b2ce-eaabe9f7ea8e)  
+  ![1](https://github.com/user-attachments/assets/a075d2b0-be33-483d-8053-aaea3f4efb3e)
 
 
-![VirtualBox_vsdworkshop_29_07_2024_15_56_56](https://github.com/user-attachments/assets/1a7f7a7a-0667-4284-958e-b0c0a6a743a4)
+![2](https://github.com/user-attachments/assets/5ff5129a-8021-46bb-bf7a-6d937c97e113)
 
-![VirtualBox_vsdworkshop_29_07_2024_15_59_09](https://github.com/user-attachments/assets/0e6c64c9-a19d-4ab8-8e49-8d53aa6080dc)
+![3](https://github.com/user-attachments/assets/8659235b-e0ed-4e5e-9469-98ca53c333e8)
+
+![4](https://github.com/user-attachments/assets/64febeb7-5607-4ba8-8cc7-8e1f44c27ca5)
+### config.tcl contains all the design environment specifications
+![5](https://github.com/user-attachments/assets/c0c4869a-2c03-48f4-93c1-3693d412dde5)
+
+![6](https://github.com/user-attachments/assets/633b8548-28ed-4c42-8d89-3e32f153f021)
+
 
 #### After synthesis is done we will see the results of synthesis both in docker winodw and also in openlane directory under synthesis
 
+![8](https://github.com/user-attachments/assets/5e3e46c8-e1f8-4643-bfc3-81448cbdb422)
+#### RESULTS  
+**FLOP RATIO =** $\frac{1613}{14876} = 0.1084$  
+**Percentage** = $\0.1084 \times 100= 10.84$
 
-![VirtualBox_vsdworkshop_29_07_2024_16_06_40](https://github.com/user-attachments/assets/6e425126-0d22-4e53-9e5f-448b1ea9ac67)
+![VirtualBox_vsdworkshop_29_07_2024_15_59_09](https://github.com/user-attachments/assets/b6c74da4-3f14-4a33-adb6-acd7bb58439b)
 
 
+![VirtualBox_vsdworkshop_29_07_2024_16_10_34](https://github.com/user-attachments/assets/e73f062b-cb9f-476d-bade-01242389da61)
+
+![VirtualBox_vsdworkshop_29_07_2024_16_14_06](https://github.com/user-attachments/assets/7985b6f4-e94e-4313-8a44-1bcb8d8b5375)
+
+#### In the end we see that the synthesis results in docker window and openlane directory matches
