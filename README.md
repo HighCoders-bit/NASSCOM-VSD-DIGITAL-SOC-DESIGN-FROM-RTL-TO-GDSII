@@ -629,8 +629,61 @@ Then check the changes in the pins location through magic -T.
 * **SIMULATION COMMANDS**:
   Now we have to give the simulation commands in which we are swiping the Vin from 0 to 2.5 with the stepsize of 0.05. Because we want Vout while changing the Vin.
 * **Final modelling**:
-   Final step is to model files. It has the complete description about NMOS and PMOS. 
-   
+   Final step is to model files. It has the complete description about NMOS and PMOS.
   
+ ### SPICE SIMULATION LAB FOR CMOS
  
+  
+ ![vtc](https://github.com/user-attachments/assets/a8d8aa39-b6b6-4e1a-9cb3-15534ccd6abd)
+ ### Switching Threshold Vm
 
+
+![static](https://github.com/user-attachments/assets/389775be-2fa6-4d41-b42f-613111b6bce3)
+
+Switching thresold, Vm (the point at which the device switches the level) is the one of the parameter that defined the robustness of the Inverter. Switching thresold is a point at which Vin=Vout.
+
+![cmos](https://github.com/user-attachments/assets/ccff5d58-6f19-423f-bf5d-afd9a1207120)
+
+### STATIC AND DYNAMIC BEHAVIOUR OF CMOS
+
+![static](https://github.com/user-attachments/assets/f7117a1b-1bb1-4f2b-86de-73dc030f702f)
+
+![dynamic](https://github.com/user-attachments/assets/80a7ef9f-8bf2-477c-aa44-bc3266083184)
+
+
+In Dynamic simulation we will know about the rise and fall delay of CMOS inverter and how does it varying with Vout. In this simulation everything else will remian same except the input which is provided will be a pulse and simulation command will be .tran
+
+The graph Time vs Voltage will be plotted here from where we can calculate the rise and fall delay.
+### LAB FOR CMOS
+Section 3 tasks:-
+* Clone custom inverter standard cell design from github repository: [Standard cell design and characterization using openlane flow](https://github.com/nickson-jose/vsdstdcelldesign.git)
+* Load the custom inverter layout in magic and explore.
+* Spice extraction of inverter in magic.
+* Editing the spice model file for analysis through simulation.
+* Post-layout ngspice simulations.
+* Find problem in the DRC section of the old magic tech file for the skywater process and fix them.
+  **Clone custom inverter standard cell design from github repository**
+  ```bash
+  # Change directory to openlane
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+# Clone the repository with custom inverter design
+git clone https://github.com/nickson-jose/vsdstdcelldesign
+
+# Change into repository directory
+cd vsdstdcelldesign
+
+# Copy magic tech file to the repo directory for easy access
+cp /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech .
+
+# Check contents whether everything is present
+ls
+
+# Command to open custom inverter layout in magic
+magic -T sky130A.tech sky130_inv.mag &
+```
+
+![VirtualBox_vsdworkshop_01_08_2024_00_31_26](https://github.com/user-attachments/assets/fa408b86-0226-4698-8d0b-8dc54cacb65b)
+![VirtualBox_vsdworkshop_01_08_2024_00_41_35](https://github.com/user-attachments/assets/e3b89cd4-052d-433a-afa8-b372b5a906f3)
+
+**Load the custom inverter layout in magic and explore**
