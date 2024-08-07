@@ -251,7 +251,7 @@ run_synthesis
 
 #### RESULTS  
 **FLOP RATIO =** $\frac{1613}{14876} = 0.1084$  
-**Percentage** = $ 0.1084 \times 100= 10.84$
+**Percentage** = $0.1084 \times 100 = 10.84$
 
 ![VirtualBox_vsdworkshop_29_07_2024_15_59_09](https://github.com/user-attachments/assets/b6c74da4-3f14-4a33-adb6-acd7bb58439b)
 
