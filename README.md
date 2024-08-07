@@ -18,7 +18,7 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
    * [D2 SK3 Cell design and characterization flows](#d2-sk3-cell-design-and-characterization-flows)
    * [D2 SK4 General timing characterization](#d2-sk4-general-timing-characterization)
  * [Day 3 Design library cells using magic layout and ngspice characterization](#day-3-design-library-cells-using-magic-layout-and-ngspice-characterization)
-    * [D3 SK1 Labs for CMOS Inverter and ngspice simulation](#d3-sk1-labs-for-cmos-invereter-and-ngspice-simulation)
+    * [D3 SK1 Labs for CMOS Inverter and ngspice simulation](#d3-sk1-labs-for-cmos-inverter-and-ngspice-simulation)
     * [D3 SK2 Inception of layout and CMOS fabrication process](#d3-sk2-inception-of-layout-and-CMOS-fabrication-process)
     * [D3 SK3 Sky130 Tech File labs](#d3-sk3-sky130-tech-file-labs)
  * [DAY 4 Prelayout timing analysis and importance of good clock tree](day-4-prelayout-timing-analysis-and-importance-of-good-clock-tree)
@@ -744,7 +744,45 @@ so,cell rise delay=(2.21078-2.14992)e-09=60.86psec
 Time taken by output to fall to 50% and input to rise to 50%    
 ![VirtualBox_vsdworkshop_07_08_2024_19_32_08](https://github.com/user-attachments/assets/54cd877e-5526-4c80-a552-7533968c8a09)  
 so,cell fall delay=(4.07586-4.04914)e-09=26.72psec
+**Find problem in the DRC section of the old magic tech file for the skywater process and fix them**
+To know more about the Magic DRC we can go to the website:-[The Magic Technology File Manual - DRC Section](http://opencircuitdesign.com/magic/Technologyfiles/TheMagicTechnologyFileManual/DrcSection)  
+Link to Google_Skywaters Design Rules: -   [SkyWater PDK Documentation - Periphery Rules](https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html)
+For reference , we can use the github repo of Google-Skywater:[SkyWater PDK GitHub Repository](https://github.com/google/skywater-pdk)
+**Commands used**
+```bash
+# Change to home directory
+cd
+
+# Command to download the lab files
+wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+
+# Since lab file is compressed command to extract it
+tar xfz drc_tests.tgz
+
+# Change directory into the lab folder
+cd drc_tests
+
+# List all files and directories present in the current directory
+ls -al
+
+# Command to view .magicrc file
+gvim .magicrc
+
+# Command to open magic tool in better graphics
+magic -d XR &
+```
+```bash
+#IN TKCON WINODW Form a seperate box
+paint v2
+cif see VIA2
+```
 
 
+![VirtualBox_vsdworkshop_02_08_2024_00_17_51](https://github.com/user-attachments/assets/0bdaa444-6cf3-4e44-a4c7-d2daec109e8b)
 
+![VirtualBox_vsdworkshop_07_08_2024_20_22_50](https://github.com/user-attachments/assets/c769e1fc-af6b-41d0-a486-f0e43082239e)
+
+![VirtualBox_vsdworkshop_02_08_2024_00_30_30](https://github.com/user-attachments/assets/b4bfd00d-d2ef-4949-a5c4-3b22dbb0bbf4)
+![VirtualBox_vsdworkshop_02_08_2024_09_55_04](https://github.com/user-attachments/assets/348dec25-ebb7-46b2-ae10-3b579b144bc2)
+![VirtualBox_vsdworkshop_07_08_2024_20_54_47](https://github.com/user-attachments/assets/a64f4145-9133-46c2-83dc-bf85e9c0e12c)
 
