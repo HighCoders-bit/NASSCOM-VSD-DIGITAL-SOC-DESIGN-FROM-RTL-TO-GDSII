@@ -262,3 +262,5 @@ run_synthesis
 ![8](https://github.com/user-attachments/assets/1b05cbce-dd0e-4aca-b327-bce415128c87)
 
 #### In the end we see that the synthesis results in docker window and openlane directory matches
+## Day 2 Good floorplan vs bad floorplan and introduction to library cells
+### D2 SK1 Chip floor planning considerations
