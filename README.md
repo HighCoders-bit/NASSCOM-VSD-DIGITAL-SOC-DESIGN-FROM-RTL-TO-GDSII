@@ -208,8 +208,8 @@ Every time the netlist is modified.(CTS modifies the netlist and Post Placements
 
 With OpenLANE, we took a preventive approach. here we add fake antenna diode next to every cell input after placement. Then run the Antenna checker on the routed layout. If the checker reports a violation on cell input pin, replace the fake diode cell by a real one.
 ## D1 SK3 Get Familiar with Open Source EDA Tools(LAB)
-**Commands to start Openlane using a docker and run synthesis**
-                        **After synthesis we have to calculate**
-                        ***FLOP RATIO= \[\frac{No of D flipflop}{Total Number of cells}\]****
-                        ***Percentage=Flop Ratio*100***
+**Commands to start Openlane using a docker and run synthesis**  
+**After synthesis we have to calculate**  
+***FLOP RATIO= \[\frac{No of D flipflop}{Total Number of cells}\]****  
+***Percentage=Flop Ratio*100***
                                       
