@@ -748,7 +748,7 @@ so,cell fall delay=(4.07586-4.04914)e-09=26.72psec
 **Find problem in the DRC section of the old magic tech file for the skywater process and fix them**
 To know more about the Magic DRC we can go to the website:-[The Magic Technology File Manual - DRC Section](http://opencircuitdesign.com/magic/Technologyfiles/TheMagicTechnologyFileManual/DrcSection)    
 Link to Google_Skywaters Design Rules: -   [SkyWater PDK Documentation - Periphery Rules](https://skywater-pdk.readthedocs.io/en/main/rules/periphery.html)  
-For reference , we can use the github repo of Google-Skywater:[SkyWater PDK GitHub Repository](https://github.com/google/skywater-pdk)
+For reference , we can use the github repo of Google-Skywater:[SkyWater PDK GitHub Repository](https://github.com/google/skywater-pdk)  
 **Commands used**
 ```bash
 # Change to home directory
@@ -785,5 +785,86 @@ cif see VIA2
 
 ![VirtualBox_vsdworkshop_02_08_2024_00_30_30](https://github.com/user-attachments/assets/b4bfd00d-d2ef-4949-a5c4-3b22dbb0bbf4)
 ![VirtualBox_vsdworkshop_02_08_2024_09_55_04](https://github.com/user-attachments/assets/348dec25-ebb7-46b2-ae10-3b579b144bc2)
-![VirtualBox_vsdworkshop_07_08_2024_20_54_47](https://github.com/user-attachments/assets/a64f4145-9133-46c2-83dc-bf85e9c0e12c)
+![VirtualBox_vsdworkshop_07_08_2024_20_54_47](https://github.com/user-attachments/assets/a64f4145-9133-46c2-83dc-bf85e9c0e12c)  
+**Incorrectly implemented poly.9**
+
+![Untitled](https://github.com/user-attachments/assets/679e11ca-554e-41e6-ae05-3d0dceffbcee)
+
+![VirtualBox_vsdworkshop_07_08_2024_23_17_10(ip)](https://github.com/user-attachments/assets/aaea6899-11a5-44b8-bbb3-6d30f47dc6ff)
+![VirtualBox_vsdworkshop_07_08_2024_23_20_38](https://github.com/user-attachments/assets/28b8c0f0-5616-4e84-87a1-2c2be95509f5)  
+**update in sky130a.tech**
+```bash
+vim sky130A.tech
+```
+![VirtualBox_vsdworkshop_07_08_2024_23_26_37](https://github.com/user-attachments/assets/b284c39e-9035-452f-9141-c65cb7943328)
+
+![VirtualBox_vsdworkshop_07_08_2024_23_29_35](https://github.com/user-attachments/assets/3172629b-679e-40d8-9aed-6c204bc6c7d3)  
+**Commands in tkcon**
+```bash
+# Loading updated tech file
+tech load sky130A.tech
+
+# Must re-run drc check to see updated drc errors
+drc check
+
+# Selecting region displaying the new errors and getting the error messages 
+drc why
+```
+
+![VirtualBox_vsdworkshop_07_08_2024_23_31_28](https://github.com/user-attachments/assets/abb9cb5c-c070-42b3-a3a7-568e5a986f30)
+![VirtualBox_vsdworkshop_07_08_2024_23_31_42](https://github.com/user-attachments/assets/d665ff84-b236-43c2-921c-79923fd21adb)
+![VirtualBox_vsdworkshop_08_08_2024_01_21_35](https://github.com/user-attachments/assets/4e8952c7-b6a4-4ccf-ad4c-53e1becfad26)  
+**Incorrectly implemented difftap2.rule**
+
+![diff](https://github.com/user-attachments/assets/a984e039-6fcb-44b3-92b2-df602569e1a9)
+![VirtualBox_vsdworkshop_08_08_2024_01_22_44](https://github.com/user-attachments/assets/67c7b885-3d4f-42f7-ad7e-9155d3263973)  
+**Update in sky130A.tech**
+```bash
+vim sky130A.tech
+```
+
+![VirtualBox_vsdworkshop_08_08_2024_01_28_07difftap](https://github.com/user-attachments/assets/2eb31bcf-f1d4-438d-ab27-241008f8a9c6)
+![VirtualBox_vsdworkshop_08_08_2024_01_32_20 difftap correct](https://github.com/user-attachments/assets/de2d9859-2a7a-4e8f-867c-7130856f1e99)  
+**Commands in tkcon**
+```bash
+# Loading updated tech file
+tech load sky130A.tech
+
+# Must re-run drc check to see updated drc errors
+drc check
+
+# Selecting region displaying the new errors and getting the error messages 
+drc why
+```
+![VirtualBox_vsdworkshop_08_08_2024_01_33_26](https://github.com/user-attachments/assets/9e64de2d-4a1d-4a89-9b66-ce9db6a32f19)  
+**Incorrect implementation of nwell.4 rule**
+
+
+![nwell](https://github.com/user-attachments/assets/8f072b76-49d7-449b-9fd9-79b296a28a08)
+
+![VirtualBox_vsdworkshop_08_08_2024_01_49_27](https://github.com/user-attachments/assets/8b05b6be-285f-4bd4-8141-969ea352285d)  
+**Update in sky130A.tech**
+```bash
+vim sky130A.tech
+```
+![VirtualBox_vsdworkshop_08_08_2024_01_53_30](https://github.com/user-attachments/assets/17c543ba-3754-4b1a-9578-edeb359a2b90)
+![VirtualBox_vsdworkshop_08_08_2024_01_57_18](https://github.com/user-attachments/assets/e27f9942-2eea-40ee-87d0-01b6658b7c97)   
+**Commands in tkcon**
+```bash
+# Loading updated tech file
+tech load sky130A.tech
+
+# Change drc style to drc full
+drc style drc(full)
+
+# Must re-run drc check to see updated drc errors
+drc check
+
+# Selecting region displaying the new errors and getting the error messages 
+drc why
+```
+![VirtualBox_vsdworkshop_08_08_2024_02_06_51](https://github.com/user-attachments/assets/fb587bbd-fbf1-4acc-8964-a273ad6b301a)
+
+
+
 
