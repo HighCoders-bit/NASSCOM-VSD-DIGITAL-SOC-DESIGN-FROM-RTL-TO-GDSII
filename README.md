@@ -211,5 +211,6 @@ With OpenLANE, we took a preventive approach. here we add fake antenna diode nex
 **Commands to start Openlane using a docker and run synthesis**  
 **After synthesis we have to calculate**  
 **FLOP RATIO =** $\frac{\text{No of D flipflop}}{\text{Total Number of cells}}$  
-***Percentage=Flop Ratio*100***
+**Percentage** = $\text{Flop Ratio} \times 100$
+
                                       
