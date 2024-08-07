@@ -14,8 +14,8 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
    * [D1 SK3 Get Familiar with Open Source EDA Tools](#d1-sk3-get-familiar-with-open-source-eda-tools)
 * [Day 2 Good floorplan vs bad floorplan and introduction to library cells](#day-2-goodfloorplan-vs-bad-floorplan-and-introduction-to-library-cells)
    * [D2 SK1 Chip floor planning considerations](#d2-sk1-chip-floor-planning-considerations)
-   * [D2 SK2 Library binding and placement](#d2-sk2-library-binding-and-placements)
-   * [D2 SK3 Cell design and characterization flows](#d2-sk3-cell-design-and-charaterization-flows)
+   * [D2 SK2 Library binding and placement](#d2-sk2-library-binding-and-placement)
+   * [D2 SK3 Cell design and characterization flows](#d2-sk3-cell-design-and-characterization-flows)
    * [D2 SK4 General timing characterization](#d2-sk4-general-timing-characterization)
  * [Day 3 Design library cells using magic layout and ngspice characterization](day-3-design-library-cells-using-magic-layout-and-ngspice-characterization)
     * [D3 SK1 Labs for CMOS Inverter and ngspice simulation](d3-sk1-labs-for-cmos-invereter-and-ngspice-simulation)
@@ -571,5 +571,24 @@ Next step is to feed in all this inputs from 1 to 8 in a form of a configuration
 ![characterizationflow](https://github.com/user-attachments/assets/b460206e-09f7-4c52-a8e7-03c4cacb263b)
 ## D2 SK4 General timing characterization
 ![timing](https://github.com/user-attachments/assets/6be06b3a-4be8-4212-8465-b9b06fb7572f)
+* **Slew Low Rise Threshold**: Start point of the rising edge transition.
+* **Slew High Rise Threshold**: End point of the rising edge transition.
+* **Slew Low Fall Threshold**: Start point of the falling edge transition.
+* **Slew High Fall Threshold**: End point of the falling edge transition.
+* **Input Rise Threshold**: Voltage level where input is considered 'high'.
+* **Input Fall Threshold**: Voltage level where input is considered 'low'.
+* **Output Rise Threshold**: Voltage level where output is considered 'high'.
+* **Output Fall Threshold**: Voltage level where output is considered 'low'.
 
+![propdelay](https://github.com/user-attachments/assets/e11d8058-d0e0-4978-aca3-af8f53fb924e)
+**Propagation Delay**:
 
+Time for a signal to propagate through a circuit element.
+Measured at the 50% points of input and output transitions.
+Affects circuit speed.
+**Transition Time**:
+
+Time for a signal to transition between voltage levels.
+Rise time (tr): 10% to 90% transition.
+Fall time (tf): 90% to 10% transition.
+Affects signal integrity and performance.
