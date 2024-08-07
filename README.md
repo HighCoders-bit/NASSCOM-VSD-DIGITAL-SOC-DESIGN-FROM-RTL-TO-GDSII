@@ -416,7 +416,7 @@ $$
 $$
 
 $$
-\text{Die width in micron} = \frac{66,685}{1000}
+\text{Die width in micron} = \frac{660,685}{1000}
 $$
 
 $$
@@ -426,3 +426,17 @@ $$
 $$
 \text{Area of die in micron} = 660.685 \times 671.405 = 443,587.212425 \text{ square microns}
 $$
+**RUNNING floorplan.def in Magic layout in another terminal**
+```bash
+# Change directory to path containing generated floorplan def
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/29-07_10-25/results/floorplan/
+
+# Command to load the floorplan def in magic tool
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.floorplan.def &
+```
+
+![VirtualBox_vsdworkshop_29_07_2024_17_28_51](https://github.com/user-attachments/assets/3a16e30f-45e7-43cd-bfd4-e31d5e7219f2)
+![VirtualBox_vsdworkshop_29_07_2024_18_35_54](https://github.com/user-attachments/assets/fba49aad-e412-4441-8673-4a9d4c0311cb)
+![VirtualBox_vsdworkshop_29_07_2024_19_15_03](https://github.com/user-attachments/assets/92323cb5-b153-4dfa-878e-1638c99c3597)
+![VirtualBox_vsdworkshop_29_07_2024_19_27_26](https://github.com/user-attachments/assets/7d7ba099-ea31-497a-8b86-207430cab598)
+![VirtualBox_vsdworkshop_29_07_2024_19_28_21](https://github.com/user-attachments/assets/9fcf975f-1763-47dc-980e-b6ed211d5aeb)
