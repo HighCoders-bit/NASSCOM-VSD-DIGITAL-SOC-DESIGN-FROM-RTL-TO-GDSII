@@ -372,4 +372,5 @@ Let's put this netlist in the core which we have designed before and let's try t
 * Load generated floorplan def in magic tool and explore the floorplan.
 * Run 'picorv32a' design congestion aware placement using OpenLANE flow and generate necessary outputs.
 * Load generated placement def in magic tool and explore the placement.
-
+  
+***Area of die in microns=Die width in microns * Die height in microns***
