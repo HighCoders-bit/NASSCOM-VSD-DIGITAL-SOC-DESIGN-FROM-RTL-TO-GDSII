@@ -691,7 +691,8 @@ magic -T sky130A.tech sky130_inv.mag &
 ![VirtualBox_vsdworkshop_01_08_2024_00_45_14](https://github.com/user-attachments/assets/47c93a7a-8041-4b88-9966-f2658537262b)
 ![VirtualBox_vsdworkshop_01_08_2024_17_16_05](https://github.com/user-attachments/assets/603f96e9-c00b-4b27-9a77-cbf0fc46c165)
 ![VirtualBox_vsdworkshop_01_08_2024_17_16_59](https://github.com/user-attachments/assets/108237f3-0752-4703-ad10-a57ebdc342f6)
-![VirtualBox_vsdworkshop_01_08_2024_17_33_28](https://github.com/user-attachments/assets/3536373f-4828-46a4-b404-871d48b667b7)
+![VirtualBox_vsdworkshop_01_08_2024_17_33_28](https://github.com/user-attachments/assets/3536373f-4828-46a4-b404-871d48b667b7)  
+## D3 SK2 Inception of layout and CMOS fabrication process
 **Spice extraction of inverter in magic**
 ```bash
 # Check current directory
@@ -724,7 +725,7 @@ plot y vs time a
 ![VirtualBox_vsdworkshop_01_08_2024_20_01_26](https://github.com/user-attachments/assets/2cefd190-8555-471c-b709-b24be3350827)
 ![VirtualBox_vsdworkshop_07_08_2024_19_01_06](https://github.com/user-attachments/assets/0a881800-b855-43ec-b7d3-ff40a2161108)  
 **Rise time**
-It is time taken to the output waveform to 20% value to 80% value.
+It is time taken to the output waveform to 20% value to 80% value.  
 ![VirtualBox_vsdworkshop_01_08_2024_20_30_39 -Rise time(2 24-2 18)](https://github.com/user-attachments/assets/61afadca-542a-4277-93c2-95fc8b91b555)  
 so, rise time= (2.24609 - 2.18215)e-09 = 63.94 psec.  
 **Fall time**  
