@@ -995,7 +995,9 @@ run_synthesis
 
 ![VirtualBox_vsdworkshop_04_08_2024_00_31_30](https://github.com/user-attachments/assets/ab755668-8ce3-4cce-9395-c6cd3f5eb5bc)
 ![VirtualBox_vsdworkshop_04_08_2024_00_36_00](https://github.com/user-attachments/assets/5b0b86d2-0851-437b-b93f-986469622eb9)
-![VirtualBox_vsdworkshop_04_08_2024_00_39_46](https://github.com/user-attachments/assets/8c7b8493-f898-4489-96ff-7f0ec5dd8785)<br>
+![VirtualBox_vsdworkshop_04_08_2024_00_39_46](https://github.com/user-attachments/assets/8c7b8493-f898-4489-96ff-7f0ec5dd8785)
+![VirtualBox_vsdworkshop_08_08_2024_13_34_23](https://github.com/user-attachments/assets/af082b78-cf82-4f36-a7a8-85e01b779553)<br>
+
 #### Introduction to delay tables
 **Power aware CTS**:If we make enable pin at logic '1' in the AND gate, then clock will propagate and if we make it 'logic 0' it will block the clock. Similarly in 'OR' gate if we make enable as 'logic 0' it will propagate and on making it 'logic 1' it will block the clock.
 
@@ -1039,3 +1041,68 @@ These tables are then used by EDA tools for timing analysis and optimization.
 
 ![delay tables](https://github.com/user-attachments/assets/28646ec8-7a0d-4705-9d4f-c867f60124cf)
 ![delay tables1](https://github.com/user-attachments/assets/9f69ba0d-c05f-4bac-87fe-2bbeeba7c421)
+
+**Run openlaneflow synthesis with modified command to improve timing**
+```bash
+
+# Change directory to openlane flow directory
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+
+docker
+# Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
+./flow.tcl -interactive
+
+# Now that OpenLANE flow is open we have to input the required packages for proper functionality of the OpenLANE flow
+package require openlane 0.9
+
+# overwrite the design
+prep -design picorv32a -tag 29-07_10-25 -overwrite 
+
+# Adiitional commands to include newly added lef to openlane flow
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+# Command to display current value of variable SYNTH_STRATEGY
+echo $::env(SYNTH_STRATEGY)
+
+# Command to set new value for SYNTH_STRATEGY
+set ::env(SYNTH_STRATEGY) 1
+
+# Command to display current value of variable SYNTH_BUFFERING to check whether it's enabled
+echo $::env(SYNTH_BUFFERING)
+
+# Command to display current value of variable SYNTH_SIZING
+echo $::env(SYNTH_SIZING)
+
+# Command to set new value for SYNTH_SIZING
+set ::env(SYNTH_SIZING) 1
+
+# Command to display current value of variable SYNTH_DRIVING_CELL to check whether it's the proper cell or not
+echo $::env(SYNTH_DRIVING_CELL)
+
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+# Run_floorplan
+run_floorplan
+# Run_placement
+run_placement
+```
+```bash
+# If floorplan fails
+init_floorplan
+place_io
+tap_decap_or
+```
+
+
+
+![VirtualBox_vsdworkshop_04_08_2024_00_42_01](https://github.com/user-attachments/assets/df6afe9b-8749-4fc5-ada3-e10f76005a44)
+
+![VirtualBox_vsdworkshop_04_08_2024_00_42_18](https://github.com/user-attachments/assets/c533b629-6db6-4477-bc8a-fbdae64b4b0c)
+
+![VirtualBox_vsdworkshop_04_08_2024_00_46_09](https://github.com/user-attachments/assets/709023ff-900d-48b5-9cbf-77577b2b2f3e)
+![VirtualBox_vsdworkshop_04_08_2024_00_46_25](https://github.com/user-attachments/assets/e6659978-aef8-4b71-a5eb-d5aef4c405c9)
+![VirtualBox_vsdworkshop_04_08_2024_01_00_55](https://github.com/user-attachments/assets/42464fc4-2d03-498c-b30c-7a5779a142a4)
+![VirtualBox_vsdworkshop_04_08_2024_01_07_20](https://github.com/user-attachments/assets/6aa6fd33-5880-4da6-8805-fc08bddff95d)
+![VirtualBox_vsdworkshop_04_08_2024_01_09_37](https://github.com/user-attachments/assets/b7ab3790-b795-4c28-bb9c-dd31e57cdb92)
+
