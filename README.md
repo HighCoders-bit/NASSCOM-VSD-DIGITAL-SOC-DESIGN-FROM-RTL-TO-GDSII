@@ -1722,4 +1722,14 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 
 ![triton route](https://github.com/user-attachments/assets/918cd0a8-2bbf-43fb-9d29-96c36f90577d)
 ![preprocessed](https://github.com/user-attachments/assets/e83da9aa-de62-4a4a-8823-52bd0bf4ef4d)
-![routing](https://github.com/user-attachments/assets/15e33e08-82d0-4c15-bc34-0458fe930ddf)
+![routing](https://github.com/user-attachments/assets/15e33e08-82d0-4c15-bc34-0458fe930ddf)<br>
+| **Feature**                  | **Fast Routing (Global Routing)**                         | **Detailed Routing**                                        |
+|------------------------------|-----------------------------------------------------------|-------------------------------------------------------------|
+| **Purpose**                  | Provides an initial, approximate routing plan             | Finalizes the exact routing paths adhering to all constraints |
+| **Speed**                    | Fast and less computationally intensive                   | Slower and computationally demanding                         |
+| **Accuracy**                 | Provides a coarse estimate; not fully accurate            | Highly accurate, ensuring manufacturability and performance  |
+| **Design Rule Compliance**   | Limited consideration of design rules                     | Full adherence to design rules and constraints                |
+| **Use Case**                 | Early-stage congestion analysis and layer assignment      | Final routing step before tape-out                            |
+| **Output**                   | Approximate paths and layer assignments                   | Final, optimized, and DRC-compliant layout                   |
+<br>
+
