@@ -26,10 +26,10 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
     * [D4 SK2 Timing analysis using ideal clock using openSTA](#d4-sk2-timing-analysis-using-ideal-clock-using-opensta)
     * [D4 SK3 Clock Tree Synthesis TritonCTS and signal integrity](#d4-sk3-clock-tree-synthesis-tritonCTS-and-signal-integrity)
     * [D4 SK4 Timing analysis with real clocks using openSTA](#d4-sk4-timing-analysis-with-real-clocks-using-opensta)
-  * [DAY 5 Final steps for RTL2GDS using Tritronroute and openSTA](day-5-final-steps-for-rtl2gds-using-tritronroute-and-opensta)
-     * [D5 SK1 Routing and design rule check](d5-sk1-routing-and-design-rule-check)
-     * [D5 SK2 Power distribution network and routing](d5-sk2-power-distribution-network-and-routing)
-     * [D5 SK3 Tritron route features](d5-sk3-tritron-route-features)
+  * [DAY 5 Final steps for RTL2GDS using Tritronroute and openSTA](#day-5-final-steps-for-rtl2gds-using-tritronroute-and-opensta)
+     * [D5 SK1 Routing and design rule check](#d5-sk1-routing-and-design-rule-check)
+     * [D5 SK2 Power distribution network and routing](#d5-sk2-power-distribution-network-and-routing)
+     * [D5 SK3 Tritron route features](#d5-sk3-tritron-route-features)
   ##  Day 1 - Inception of open-source EDA OpenLANE and sky130 PDK
   ### D1 SK1 How To Talk to Computers
   ## SKY L1 Introduction to QFN-48 Package chip pads core die and IPs
@@ -1574,5 +1574,152 @@ echo $::env(CTS_CLK_BUFFER_LIST)
 ![VirtualBox_vsdworkshop_04_08_2024_23_31_23](https://github.com/user-attachments/assets/fa078dc7-1722-4453-b6bb-7a6bb95b6134)
 
 ![VirtualBox_vsdworkshop_04_08_2024_23_34_00](https://github.com/user-attachments/assets/486ae600-2a7c-449d-aec4-fa53c0d192d8)
+## DAY 5 Final steps for RTL2GDS using Tritronroute and openSTA
+### D5 SK1 Routing and design rule check<br>
+**Introduction to maze routing(Lees algorithm)** <br>
+**Routing**:It is finding the best shortest possible connection between two end points with one point being the source and other point being the target and with less number of twist and turns.<br>
+**Maze-Routing(Lee's Algorithm)**: These should not be zig-zag lines of connections most of the connections should be in L shape or in Z shape. So according to algorithm first it create some grids and grids are routing at the backend. It's called as routing grid. There are some numbers of grids on this routig having some dimensions. SO here we are having two points one is 'Source' and the other is 'Target'. With the help of this routing grid algorithm has to find out the best possible way between them.
+
+First step is algorithm tries to lable all of the grids surrounded. Only the adjacent horizontal and vertical grids are labeled not the digonal one as shown in the image below.Now we will lable the grids to the next integer untill we reach to the target. In the example we reached the target after integer 9.So now there are so many ways to reach to target from source but we have to choose the best shortest possible way to reach the target.And we need to avoid the zig-zag way better to cghoose 'L' shape routing'.
 
 
+![mazerouting](https://github.com/user-attachments/assets/1499bea7-ee31-4a85-8df5-1e798241ced4)<br>
+**Design Rule check**:So in order to go to DRC we need to follow some steps which are called drc cleaning.
+
+Let's take the example of the above circuit. Let's we have two parallel wires so the rule says that whenever we choose two wires there should be minimum distance between these two wires.
+
+![drc1](https://github.com/user-attachments/assets/08409958-aaa2-43fd-9ee4-f387d9f23f43)<br>
+***Rule***<br> 
+1- Wire width:- Width of the wire should be minimum that derived from the optical wavelenth of lithography technique applied.<br>
+
+![DRC](https://github.com/user-attachments/assets/c9ce2e5c-d674-4584-96fe-36a7333a3a8b)<br>
+2-Wire Pitch:- The minimum pitch between two wire should be this much as shown in the figure below.<br>
+
+
+![drc2](https://github.com/user-attachments/assets/dca840b3-d19b-4043-8f4c-862589dc33ab)<br>
+3-Wire Spacing:- The wire spacing between two wires should be as shown in the image below.<br>
+
+![drc3](https://github.com/user-attachments/assets/596139ab-6732-4e0c-81c8-c816135c8539)<br>
+
+
+![DRC violation](https://github.com/user-attachments/assets/11630d1a-6d5a-4099-9ce9-ab3b3e5dc91e)<br>
+Solution of this signal short problem is take one of the wire and put it on the other metal layer. usually upper metal is wider than the lower metal.Check Via width and Via spacing
+
+
+![Newdrc](https://github.com/user-attachments/assets/2ff174a4-3a42-4c24-b0f3-c0018703b738)<br>
+After routing and DRC the next step is Parasitic extraction. Resistance and capacitance present on every wire should be extracted and use for further process.
+### DAY 5 LAB IMPLEMENTATION
+* Perform generation of Power Distribution Network (PDN) and explore the PDN layout.
+* Perfrom detailed routing using TritonRoute.
+* Post-Route parasitic extraction using SPEF extractor.
+* Post-Route OpenSTA timing analysis with the extracted parasitics of the route.<br>
+### D5 SK2 Power distribution network and routing
+```bash
+# Change directory to openlane flow directory
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+
+docker
+# Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
+./flow.tcl -interactive
+
+# Now that OpenLANE flow is open we have to input the required packages for proper functionality of the OpenLANE flow
+package require openlane 0.9
+
+# Now the OpenLANE flow is ready to run any design and initially we have to prep the design creating some necessary files and directories for running a specific design which in our case is 'picorv32a'
+prep -design picorv32a
+
+# Addiitional commands to include newly added lef to openlane flow merged.lef
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+# Command to set new value for SYNTH_STRATEGY
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+
+# Command to set new value for SYNTH_SIZING
+set ::env(SYNTH_SIZING) 1
+
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+
+# Following commands are alltogather sourced in "run_floorplan" command
+init_floorplan
+place_io
+tap_decap_or
+
+# Now we are ready to run placement
+run_placement
+
+# Incase getting error
+unset ::env(LIB_CTS)
+
+# With placement done we are now ready to run CTS
+run_cts
+
+# Now that CTS is done we can do power distribution network
+gen_pdn
+```
+
+
+![VirtualBox_vsdworkshop_05_08_2024_18_54_57](https://github.com/user-attachments/assets/934457ee-af26-42df-9f20-0c12ca11d982)
+
+![VirtualBox_vsdworkshop_05_08_2024_18_57_00](https://github.com/user-attachments/assets/65b62f64-5330-4426-aeb5-0d4da04564e8)
+
+![VirtualBox_vsdworkshop_05_08_2024_19_01_04](https://github.com/user-attachments/assets/208d8ac9-76be-453b-b562-8639621ea028)
+![VirtualBox_vsdworkshop_05_08_2024_19_01_19](https://github.com/user-attachments/assets/9e760a5c-3def-4003-9c57-53d83acc2042)<br>
+```bash
+# Change directory to path containing generated PDN def
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/05-03_13-22/tmp/floorplan/
+
+# Command to load the PDN def in magic tool
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read 14-pdn.def &
+```
+
+![VirtualBox_vsdworkshop_05_08_2024_19_26_37 -PDN](https://github.com/user-attachments/assets/110d03d9-16aa-4109-b4e8-8e0967e8d98c)
+
+![VirtualBox_vsdworkshop_05_08_2024_19_30_30](https://github.com/user-attachments/assets/bd6daf3b-feb2-4437-9fc0-049bb4e20594)<br>
+**Lab steps from power distribution to routing**<br>
+
+![power distribution](https://github.com/user-attachments/assets/80bdf58d-ddcb-46ba-a780-893a27c423a2)<br>
+Here green color is representing the chip, and yellow, red and blue boxes are the I/O pins,power and ground pads respectively.
+
+Power is transfered to the rings from the pads through the black dots shown in the image on the cross section points of the ring and pads.
+
+We have vertical and horizontal tracks which ensures that the power is being transfered from the ring to chip this is shown by the red and blue color. This is how power planing works in physical design of any device.<br>
+**Perfrom detailed routing using TritonRoute and explore the routed layout**
+```bash
+# Check value of 'CURRENT_DEF'
+echo $::env(CURRENT_DEF)
+
+# Check value of 'ROUTING_STRATEGY'
+echo $::env(ROUTING_STRATEGY)
+
+# Command for detailed route using TritonRoute
+run_routing
+Screenshots of routing run
+```
+
+
+
+![VirtualBox_vsdworkshop_05_08_2024_19_31_47](https://github.com/user-attachments/assets/1865282e-dc4f-4167-bc6f-e0fdd21a2952)
+![VirtualBox_vsdworkshop_05_08_2024_19_32_15](https://github.com/user-attachments/assets/41eec26d-ce76-47ec-af6c-7fbb7bd74247)
+![VirtualBox_vsdworkshop_05_08_2024_19_52_49](https://github.com/user-attachments/assets/8ae401c2-9f97-4ee5-ad4f-ba58c0c46449)<br>
+
+Commands to load routed def in magic in another terminal
+```bash
+# Change directory to path containing routed def
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/05-08_13-22/results/routing/
+
+# Command to load the routed def in magic tool
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.def &
+```
+
+![VirtualBox_vsdworkshop_05_08_2024_20_11_23](https://github.com/user-attachments/assets/108b1a1d-6b60-428f-a026-082f05e87d46)
+
+![VirtualBox_vsdworkshop_08_08_2024_20_57_55](https://github.com/user-attachments/assets/bd75213d-7aef-4e9f-ba88-128d88b319e7)
+
+## D5 SK3 Tritron route features
+
+![triton route](https://github.com/user-attachments/assets/918cd0a8-2bbf-43fb-9d29-96c36f90577d)
+![preprocessed](https://github.com/user-attachments/assets/e83da9aa-de62-4a4a-8823-52bd0bf4ef4d)
+![routing](https://github.com/user-attachments/assets/15e33e08-82d0-4c15-bc34-0458fe930ddf)
