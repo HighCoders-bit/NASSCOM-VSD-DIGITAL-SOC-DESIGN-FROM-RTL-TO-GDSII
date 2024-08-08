@@ -865,7 +865,7 @@ drc why
 ```
 ![VirtualBox_vsdworkshop_08_08_2024_02_06_51](https://github.com/user-attachments/assets/fb587bbd-fbf1-4acc-8964-a273ad6b301a)
 ## DAY 4 Prelayout timing analysis and importance of good clock tree
-### D4 SK1 Timing modelling using delay table  
+###  D4 SK1 Timing modelling using delay tables
 **LAB TASK FOR DAY 4**
 * Fix up small DRC errors and verify the design is ready to be inserted into our flow.
 * Save the finalized layout with custom name and open it.
@@ -969,4 +969,73 @@ set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/sr
 ```
 
 ![15](https://github.com/user-attachments/assets/ebcd5ed2-c497-4982-b44b-dae58b304dca)
-![16](https://github.com/user-attachments/assets/ec41bbf1-e270-4905-bbee-9545654ab3f1)
+![16](https://github.com/user-attachments/assets/ec41bbf1-e270-4905-bbee-9545654ab3f1)<br>
+**Run openlane flow synthesis with newly inserted custom inverter cell**
+```bash
+# Change directory to openlane flow directory
+cd Desktop/work/tools/openlane_working_dir/openlane
+docker
+# Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
+./flow.tcl -interactive
+
+# Now that OpenLANE flow is open we have to input the required packages for proper functionality of the OpenLANE flow
+package require openlane 0.9
+
+# Now the OpenLANE flow is ready to run any design and initially we have to prep the design creating some necessary files and directories for running a specific design which in our case is 'picorv32a'
+prep -design picorv32a
+
+# Adiitional commands to include newly added lef to openlane flow
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+```
+
+
+![VirtualBox_vsdworkshop_04_08_2024_00_31_30](https://github.com/user-attachments/assets/ab755668-8ce3-4cce-9395-c6cd3f5eb5bc)
+![VirtualBox_vsdworkshop_04_08_2024_00_36_00](https://github.com/user-attachments/assets/5b0b86d2-0851-437b-b93f-986469622eb9)
+![VirtualBox_vsdworkshop_04_08_2024_00_39_46](https://github.com/user-attachments/assets/8c7b8493-f898-4489-96ff-7f0ec5dd8785)<br>
+#### Introduction to delay tables
+**Power aware CTS**:If we make enable pin at logic '1' in the AND gate, then clock will propagate and if we make it 'logic 0' it will block the clock. Similarly in 'OR' gate if we make enable as 'logic 0' it will propagate and on making it 'logic 1' it will block the clock.
+
+So the advantage of this blocking period is that we can save lot of power in clock tree.
+
+![Untitled](https://github.com/user-attachments/assets/4de6a8e8-d4f7-4787-ac68-9407f49df0fa)
+**Understanding need and usage of delay tables**<br>
+**What Are Delay Tables?**<br>
+Delay tables are data structures used in digital integrated circuit design to model and store the delay characteristics of various components, such as gates, interconnects, and cells. They provide information about how long it takes for a signal to propagate through a component under different conditions.<br>
+
+**Need for Delay Tables**<br>
+* **Accurate Timing Analysis**: Delay tables are crucial for performing accurate timing analysis of digital circuits. They allow designers to predict the performance of a circuit and ensure that it meets timing requirements.
+* **Performance Optimization**: By understanding the delay characteristics, designers can optimize the design for speed, reducing critical path delays and improving overall performance.
+* **Design Verification:** Delay tables help in verifying that the design meets the required timing constraints, preventing timing violations that can lead to functional errors.
+* **Library Characterization:** Standard cell libraries use delay tables to characterize the delay of each cell under various conditions of load, input slew, voltage, and temperature.<br>
+ **Components of Delay Tables**<br>
+* **Input Slew Rate**: The rate at which the input signal transitions from low to high or high to low.
+* **Output Load**: The capacitance that the output of a cell or gate has to drive.
+* **Voltage and Temperature**: Delay can vary based on operating voltage and temperature, so tables often include different conditions.
+* **Transition Time (Slew)**: The time it takes for a signal to transition from one logic level to another.
+* **Propagation Delay**: The time it takes for a signal to travel from the input to the output of a cell.<br>
+**Usage of Delay Tables**<br>
+
+* **Static Timing Analysis (STA)**:
+
+STA tools use delay tables to calculate the timing of each path in the circuit.
+They sum the delays of individual components along a path to determine the total path delay.
+STA checks the design against timing constraints to ensure that signals arrive within required time windows.
+* **Timing Closure**:
+
+During the design process, especially in place-and-route (P&R), delay tables are used to achieve timing closure.
+Designers adjust the placement of cells, routing of interconnects, and other parameters to minimize delays and meet timing goals.
+* **Simulation**:
+
+Delay tables are used in timing simulations to predict how the circuit will behave under different conditions.
+Accurate delay modeling is essential for functional verification and ensuring reliable operation.
+* **Library Development**:
+
+When developing standard cell libraries, delay tables are generated for each cell to describe its behavior under various conditions.
+These tables are then used by EDA tools for timing analysis and optimization.
+
+![delay tables](https://github.com/user-attachments/assets/28646ec8-7a0d-4705-9d4f-c867f60124cf)
+![delay tables1](https://github.com/user-attachments/assets/9f69ba0d-c05f-4bac-87fe-2bbeeba7c421)
