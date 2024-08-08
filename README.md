@@ -880,7 +880,7 @@ drc why
 * Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts.
 * Post-CTS OpenROAD timing analysis.
 * Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.
- **LEF(Library Exchange format)**:LEF files describe the physical properties of standard cells, macros, and other library elements. They do not include any information about the actual placement of cells in a design but rather provide the necessary details for placing and routing the design.
+  **LEF(Library Exchange format)**:LEF files describe the physical properties of standard cells, macros, and other library elements. They do not include any information about the actual placement of cells in a design but rather provide the necessary details for placing and routing the design.
    **DEF(Design Exchange format)**:DEF files describe the actual placement and routing of the cells in a specific design. It contains detailed information about how the design has been laid out, including the position of each cell and the routing of interconnections.
   1.**Fix up small DRC errors and verify the design is ready to be inserted into our flow**:
   Condition to be satisfied before making standard cell
