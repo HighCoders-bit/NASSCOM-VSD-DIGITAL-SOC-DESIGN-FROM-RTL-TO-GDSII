@@ -21,8 +21,8 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
     * [D3 SK1 Labs for CMOS Inverter and ngspice simulation](#d3-sk1-labs-for-cmos-inverter-and-ngspice-simulation)
     * [D3 SK2 Inception of layout and CMOS fabrication process](#d3-sk2-inception-of-layout-and-CMOS-fabrication-process)
     * [D3 SK3 Sky130 Tech File labs](#d3-sk3-sky130-tech-file-labs)
- * [DAY 4 Prelayout timing analysis and importance of good clock tree](day-4-prelayout-timing-analysis-and-importance-of-good-clock-tree)
-    * [D4 SK1 Timing modelling using delay tables](d4-sk1-timing-modelling-using-delay-tables)
+ * [DAY 4 Prelayout timing analysis and importance of good clock tree](#day-4-prelayout-timing-analysis-and-importance-of-good-clock-tree)
+    * [D4 SK1 Timing modelling using delay tables](#d4-sk1-timing-modelling-using-delay-tables)
     * [D4 SK2 Timing analysis using ideal clock using openSTA](d4-sk2-timing-analysis-using-ideal-clock-using-opensta)
     * [D4 SK3 Clock Tree Synthesis TritonCTS and signal integrity](d4-sk3-clock-tree-synthesis-tritonCTS-and-signal-integrity)
     * [D4  SK4 Timing analysis with real clocks using openSTA](d4-sk4-timing-analysis-with-real-clocks-using-open-sta)
@@ -864,7 +864,109 @@ drc check
 drc why
 ```
 ![VirtualBox_vsdworkshop_08_08_2024_02_06_51](https://github.com/user-attachments/assets/fb587bbd-fbf1-4acc-8964-a273ad6b301a)
+## DAY 4 Prelayout timing analysis and importance of good clock tree
+### D4 SK1 Timing modelling using delay table  
+**LAB TASK FOR DAY 4**
+* Fix up small DRC errors and verify the design is ready to be inserted into our flow.
+* Save the finalized layout with custom name and open it.
+* Generate lef from the layout.
+* Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory.
+* Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow.
+* Run openlane flow synthesis with newly inserted custom inverter cell.
+* Remove/reduce the newly introduced violations with the introduction of custom inverter cell by modifying design parameters.
+* Once synthesis has accepted our custom inverter we can now run floorplan and placement and verify the cell is accepted in PnR flow.
+* Do Post-Synthesis timing analysis with OpenSTA tool.
+* Make timing ECO fixes to remove all violations.
+* Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts.
+* Post-CTS OpenROAD timing analysis.
+* Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'.
+  **LEF(Library Exchange format)**:LEF files describe the physical properties of standard cells, macros, and other library elements. They do not include any information about the actual placement of cells in a design but rather provide the necessary details for placing and routing the design.
+  **DEF(Design Exchange format)**:DEF files describe the actual placement and routing of the cells in a specific design. It contains detailed information about how the design has been laid out, including the position of each cell and the routing of interconnections.
+  1.**Fix up small DRC errors and verify the design is ready to be inserted into our flow**:
+  Condition to be satisfied before making standard cell
+  * The input and output ports of the standard cell should lie on the intersection of the vertical and horizontal tracks.
+  * Width of the standard cell should be odd multiples of the horizontal track pitch.
+  * Height of the standard cell should be even multiples of the vertical track pitch.
+Open the track file from```pdk/sky130/libs.tech /openlane/sky130_fd_sc_hd/track.info```
+
+![1](https://github.com/user-attachments/assets/440b92cf-6ed4-4128-873a-4097e24bd552)
+![2](https://github.com/user-attachments/assets/a070a0e9-19f6-477c-b2f4-b38e3e3a9a92)  
+**Commands to open custom inverter layout**
+```bash
+# Change directory to vsdstdcelldesign
+cd Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign
+
+# Command to open custom inverter layout in magic
+magic -T sky130A.tech sky130_inv.mag &
+# Get syntax for grid command
+help grid
+
+# Set grid values accordingly
+grid 0.46um 0.34um 0.23um 0.17um
+```
+**Checking conditions 1,2&3**
+
+![4](https://github.com/user-attachments/assets/faf4a323-88bc-4e98-b650-9eb241d3e1dc)
+
+![5](https://github.com/user-attachments/assets/94f852b7-46dd-407d-9d6f-9c990baf5a4e)
+
+![6](https://github.com/user-attachments/assets/fe205bc2-2bc6-4318-b117-9f23493e69c6)
+
+**Opening newly created inverter and check various port names and its value**
+```bash
+# Command to save as
+save sky130_vsdinv.mag
+
+# Command to open custom inverter layout in magic
+magic -T sky130A.tech sky130_vsdinv.mag &
+```
+
+![7](https://github.com/user-attachments/assets/b3d15096-16aa-498e-91c4-f7445bf1f493)
 
 
+![VirtualBox_vsdworkshop_04_08_2024_00_19_44](https://github.com/user-attachments/assets/dd9e3054-f492-4482-a6c8-5707fa7932e3)
 
 
+![8](https://github.com/user-attachments/assets/ec09f98d-42ed-489c-a656-a66daee36cfd)  
+**Generating lef from layout**  
+```bash
+# lef command
+lef write
+```
+
+
+![VirtualBox_vsdworkshop_04_08_2024_00_19_36](https://github.com/user-attachments/assets/2523405d-a845-4681-81f8-9005b7eac3b8)
+![9](https://github.com/user-attachments/assets/ef0ab4c2-ed83-43ed-9d48-6d001ca5a5ca)
+![10](https://github.com/user-attachments/assets/f3b6f92a-2a3d-46c2-ba74-b045e7441b8d)  
+**Copy the newly generated lef and associated required lib files to 'picorv32a' design 'src' directory**
+```bash
+# Copy lef file
+cp sky130_vsdinv.lef ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+
+# List and check whether it's copied
+ls ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+
+# Copy lib files
+cp libs/sky130_fd_sc_hd__* ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+
+# List and check whether it's copied
+ls ~/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/src/
+```
+
+![11](https://github.com/user-attachments/assets/74d237fc-fc4f-4793-909c-db212fd91c6f)
+![12](https://github.com/user-attachments/assets/0774ef85-57b2-4646-86f7-2f9c65ec232d)
+![13](https://github.com/user-attachments/assets/6cd9941a-1b67-46d6-95d2-f5a96258e1bc)
+![14](https://github.com/user-attachments/assets/106cf674-4eae-4182-8f76-8d279dbb7b42)  
+**Edit 'config.tcl' to change lib file and add the new extra lef into the openlane flow**  
+**Commands to be added in config.tcl**
+```bash
+set ::env(LIB_SYNTH) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+set ::env(LIB_FASTEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__fast.lib"
+set ::env(LIB_SLOWEST) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__slow.lib"
+set ::env(LIB_TYPICAL) "$::env(OPENLANE_ROOT)/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib"
+
+set ::env(EXTRA_LEFS) [glob $::env(OPENLANE_ROOT)/designs/$::env(DESIGN_NAME)/src/*.lef]
+```
+
+![15](https://github.com/user-attachments/assets/ebcd5ed2-c497-4982-b44b-dae58b304dca)
+![16](https://github.com/user-attachments/assets/ec41bbf1-e270-4905-bbee-9545654ab3f1)
