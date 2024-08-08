@@ -1830,7 +1830,8 @@ Since OpenLANE does not have a SPEF extraction tool, this process needs to be do
 
 The resulting .spef file can be located in the routing folder under the results folder
 
-![VirtualBox_vsdworkshop_05_08_2024_20_36_18](https://github.com/user-attachments/assets/b5af8a48-5f08-47cd-8821-bae3f2ce1557)<br>
+![VirtualBox_vsdworkshop_09_08_2024_00_44_05](https://github.com/user-attachments/assets/7d3829f4-e2cc-4452-a39f-35579c09df50)<br>
+
 # ACKNOWLEDGEMENTS
 * Kunal Ghosh, Co-founder, VSD Corp. Pvt. Ltd.
 * Nickson P Jose, Physical Design Engineer, Intel Corporation.<br>
