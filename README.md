@@ -1669,7 +1669,7 @@ gen_pdn
 ![VirtualBox_vsdworkshop_05_08_2024_19_01_19](https://github.com/user-attachments/assets/9e760a5c-3def-4003-9c57-53d83acc2042)<br>
 ```bash
 # Change directory to path containing generated PDN def
-cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/05-03_13-22/tmp/floorplan/
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/05-08_13-22/tmp/floorplan/
 
 # Command to load the PDN def in magic tool
 magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read 14-pdn.def &
@@ -1721,7 +1721,39 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 ## D5 SK3 Tritron route features
 
 ![triton route](https://github.com/user-attachments/assets/918cd0a8-2bbf-43fb-9d29-96c36f90577d)
-![preprocessed](https://github.com/user-attachments/assets/e83da9aa-de62-4a4a-8823-52bd0bf4ef4d)
+![preprocessed](https://github.com/user-attachments/assets/e83da9aa-de62-4a4a-8823-52bd0bf4ef4d)<br>
+**TritonRoute Features**
+TritonRoute is a sophisticated detailed routing tool designed for the physical design of integrated circuits (ICs). It integrates several advanced features that enable efficient and accurate routing in complex designs, especially for advanced technology nodes.<br>
+
+**Key Features of TritonRoute**
+* **Preprocessed Route Guides**:
+
+TritonRoute uses preprocessed route guides to enhance the efficiency of the routing process. These guides are generated during the global routing stage and provide the tool with initial routing paths, helping to streamline the detailed routing phase.
+By following these guides, TritonRoute can reduce the search space for routing paths, leading to faster and more efficient routing.
+* **Inter-Guide Connectivity**:
+
+The tool effectively manages inter-guide connectivity, ensuring that the connections between different routing guides are optimized for both performance and manufacturability.
+This feature helps maintain continuity across different routing segments and ensures that all nets are properly connected according to the design specifications.
+* **Intra- & Inter-Layer Routing**:
+
+TritonRoute handles both intra-layer and inter-layer routing with precision. Intra-layer routing deals with connections within the same metal layer, while inter-layer routing handles connections between different metal layers.
+The tool carefully manages the transitions between layers, using vias and other routing strategies to ensure that all connections are made efficiently and with minimal interference.
+* **Intra-Layer Parallel and Inter-Layer Sequential Panel Routing**:
+
+TritonRoute employs an intra-layer parallel routing method, allowing it to handle multiple routing tasks simultaneously within the same layer. This parallelism increases the efficiency and speed of the routing process.
+For inter-layer routing, TritonRoute uses a sequential panel routing method. This approach ensures that connections between different layers are made in a controlled and orderly manner, reducing the risk of conflicts and ensuring that all design rules are adhered to.
+* **Connectivity Access Point Handling**:
+
+TritonRoute includes advanced algorithms for managing connectivity access points, which are critical for ensuring that all nets are properly connected in the final design.
+The tool handles both access points and access point clusters, ensuring that even in dense or complex designs, all required connections are made reliably.
+* **Access Point Cluster Management**:
+
+TritonRoute manages access point clusters, which are groups of potential connection points that can be used to connect different parts of the design. By efficiently managing these clusters, the tool can optimize routing paths and reduce congestion, leading to better overall design performance.<br>
+
+
+
+
+
 ![routing](https://github.com/user-attachments/assets/15e33e08-82d0-4c15-bc34-0458fe930ddf)<br>
 | **Feature**                  | **Fast Routing (Global Routing)**                         | **Detailed Routing**                                        |
 |------------------------------|-----------------------------------------------------------|-------------------------------------------------------------|
@@ -1732,4 +1764,63 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 | **Use Case**                 | Early-stage congestion analysis and layer assignment      | Final routing step before tape-out                            |
 | **Output**                   | Approximate paths and layer assignments                   | Final, optimized, and DRC-compliant layout                   |
 <br>
+
+
+![routing algo](https://github.com/user-attachments/assets/f56ecd93-c34f-40a8-83f7-baf4ea16815a)<br>
+**Post-Route OpenSTA timing analysis with the extracted parasitics of the route**
+```bash
+# Command to run OpenROAD tool
+openroad
+
+# Reading lef file
+read_lef /openLANE_flow/designs/picorv32a/runs/26-03_08-45/tmp/merged.lef
+
+# Reading def file
+read_def /openLANE_flow/designs/picorv32a/runs/26-03_08-45/results/routing/picorv32a.def
+
+# Creating an OpenROAD database to work with
+write_db pico_route.db
+
+# Loading the created database in OpenROAD
+read_db pico_route.db
+
+# Read netlist post CTS
+read_verilog /openLANE_flow/designs/picorv32a/runs/05-08_13-22/results/synthesis/picorv32a.synthesis_preroute.v
+
+# Read library for design
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+
+# Link design and library
+link_design picorv32a
+
+# Read in the custom sdc we created
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+
+# Setting all cloks as propagated clocks
+set_propagated_clock [all_clocks]
+
+# Read SPEF
+read_spef /openLANE_flow/designs/picorv32a/runs/26-03_08-45/results/routing/picorv32a.spef
+
+# Generating custom timing report
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+
+# Exit to OpenLANE flow
+exit
+```
+
+![VirtualBox_vsdworkshop_05_08_2024_23_15_55](https://github.com/user-attachments/assets/2425076a-18ef-43ef-ab4c-411860621dad)
+
+![VirtualBox_vsdworkshop_05_08_2024_23_21_48](https://github.com/user-attachments/assets/098e9317-483f-4be1-b730-c00e06cb36f6)
+![VirtualBox_vsdworkshop_05_08_2024_23_22_24](https://github.com/user-attachments/assets/1d10d508-a95d-42b1-b17f-3051658f7b0f)<br>
+Since OpenLANE does not have a SPEF extraction tool, this process needs to be done outside of OpenLANE.
+
+The resulting .spef file can be located in the routing folder under the results folder
+
+![VirtualBox_vsdworkshop_05_08_2024_20_36_18](https://github.com/user-attachments/assets/b5af8a48-5f08-47cd-8821-bae3f2ce1557)<br>
+# ACKNOWLEDGEMENTS
+* Kunal Ghosh, Co-founder, VSD Corp. Pvt. Ltd.
+* Nickson P Jose, Physical Design Engineer, Intel Corporation.<br>
+
+  
 
