@@ -1103,7 +1103,20 @@ tap_decap_or
 
 ![VirtualBox_vsdworkshop_04_08_2024_00_46_09](https://github.com/user-attachments/assets/952873d5-433d-4ba3-9988-b8c6217de7a5)
 
-![VirtualBox_vsdworkshop_04_08_2024_00_46_25](https://github.com/user-attachments/assets/26951f4a-108e-4194-8c7f-8e487ba78f6d)
+![VirtualBox_vsdworkshop_04_08_2024_00_46_25](https://github.com/user-attachments/assets/26951f4a-108e-4194-8c7f-8e487ba78f6d)<br>
+Here we see even after changing command the slack that is wns(worst negative slack)=-23.89 and tns(totalnegative slack)=-711.59 has not reduced.But to reduce it we can use command  
+```set ::env(SYNTH_STRATEGY) "DELAY 3"``` which is more agressive to reduce wns and tns.Alltough ultimately slack will reduce after cts and routing is done even though it is not reduced now.<br>
+
+
+![VirtualBox_vsdworkshop_08_08_2024_20_37_11](https://github.com/user-attachments/assets/54b9dc6c-8a79-428d-b3fd-54eb3df5a4d8)
+
+
+![VirtualBox_vsdworkshop_08_08_2024_20_40_51](https://github.com/user-attachments/assets/cc3bfea8-c429-4a24-80af-613a72140d19)
+
+![VirtualBox_vsdworkshop_08_08_2024_20_41_18](https://github.com/user-attachments/assets/abfb423f-7e87-4889-8a95-1403136933a0)<br>
+**We see that tns and wns has reduced but correspondingly chip area has increased.So this is a trade off.Previous chip area was ```147712.918400```**<br>
+**However we use the ```set ::env(SYNTH_STRATEGY) 1 ```to run floorplan and placement and later reduce tns and wns**
+
 ![VirtualBox_vsdworkshop_04_08_2024_01_00_55](https://github.com/user-attachments/assets/49271fc5-33fb-4057-a15f-5f9e184e64cc)
 ![VirtualBox_vsdworkshop_03_08_2024_20_03_46](https://github.com/user-attachments/assets/1577a759-e742-4e05-a759-016b59b5c768)
 
