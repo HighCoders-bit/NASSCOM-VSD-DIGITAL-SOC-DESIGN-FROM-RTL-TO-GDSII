@@ -23,8 +23,8 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
     * [D3 SK3 Sky130 Tech File labs](#d3-sk3-sky130-tech-file-labs)
  * [DAY 4 Prelayout timing analysis and importance of good clock tree](#day-4-prelayout-timing-analysis-and-importance-of-good-clock-tree)
     * [D4 SK1 Timing modelling using delay tables](#d4-sk1-timing-modelling-using-delay-tables)
-    * [D4 SK2 Timing analysis using ideal clock using openSTA](d4-sk2-timing-analysis-using-ideal-clock-using-opensta)
-    * [D4 SK3 Clock Tree Synthesis TritonCTS and signal integrity](d4-sk3-clock-tree-synthesis-tritonCTS-and-signal-integrity)
+    * [D4 SK2 Timing analysis using ideal clock using openSTA](#d4-sk2-timing-analysis-using-ideal-clock-using-opensta)
+    * [D4 SK3 Clock Tree Synthesis TritonCTS and signal integrity](#d4-sk3-clock-tree-synthesis-tritonCTS-and-signal-integrity)
     * [D4  SK4 Timing analysis with real clocks using openSTA](d4-sk4-timing-analysis-with-real-clocks-using-open-sta)
   * [DAY 5 Final steps for RTL2GDS using Tritronroute and openSTA](day-5-final-steps-for-rtl2gds-using-tritronroute-and-opensta)
      * [D5 SK1 Routing and design rule check](d5-sk1-routing-and-design-rule-check)
@@ -1086,6 +1086,7 @@ run_synthesis
 run_floorplan
 # Run_placement
 run_placement
+
 ```
 ```bash
 # If floorplan fails
@@ -1095,14 +1096,259 @@ tap_decap_or
 ```
 
 
+![VirtualBox_vsdworkshop_04_08_2024_00_42_01](https://github.com/user-attachments/assets/d28f4d67-7f28-4e7c-872c-2214e95c211c)
 
-![VirtualBox_vsdworkshop_04_08_2024_00_42_01](https://github.com/user-attachments/assets/df6afe9b-8749-4fc5-ada3-e10f76005a44)
+![VirtualBox_vsdworkshop_04_08_2024_00_42_18](https://github.com/user-attachments/assets/ba2841a9-20f2-4b5f-96f6-41da07a5d6e3)
 
-![VirtualBox_vsdworkshop_04_08_2024_00_42_18](https://github.com/user-attachments/assets/c533b629-6db6-4477-bc8a-fbdae64b4b0c)
 
-![VirtualBox_vsdworkshop_04_08_2024_00_46_09](https://github.com/user-attachments/assets/709023ff-900d-48b5-9cbf-77577b2b2f3e)
-![VirtualBox_vsdworkshop_04_08_2024_00_46_25](https://github.com/user-attachments/assets/e6659978-aef8-4b71-a5eb-d5aef4c405c9)
-![VirtualBox_vsdworkshop_04_08_2024_01_00_55](https://github.com/user-attachments/assets/42464fc4-2d03-498c-b30c-7a5779a142a4)
-![VirtualBox_vsdworkshop_04_08_2024_01_07_20](https://github.com/user-attachments/assets/6aa6fd33-5880-4da6-8805-fc08bddff95d)
-![VirtualBox_vsdworkshop_04_08_2024_01_09_37](https://github.com/user-attachments/assets/b7ab3790-b795-4c28-bb9c-dd31e57cdb92)
+![VirtualBox_vsdworkshop_04_08_2024_00_46_09](https://github.com/user-attachments/assets/952873d5-433d-4ba3-9988-b8c6217de7a5)
+
+![VirtualBox_vsdworkshop_04_08_2024_00_46_25](https://github.com/user-attachments/assets/26951f4a-108e-4194-8c7f-8e487ba78f6d)
+![VirtualBox_vsdworkshop_04_08_2024_01_00_55](https://github.com/user-attachments/assets/49271fc5-33fb-4057-a15f-5f9e184e64cc)
+![VirtualBox_vsdworkshop_03_08_2024_20_03_46](https://github.com/user-attachments/assets/1577a759-e742-4e05-a759-016b59b5c768)
+
+![VirtualBox_vsdworkshop_03_08_2024_20_03_59](https://github.com/user-attachments/assets/c1e14930-e893-41e7-b778-81f77886d1f6)
+![VirtualBox_vsdworkshop_03_08_2024_20_04_36](https://github.com/user-attachments/assets/85857e2c-41f4-4421-ba01-28f6881e7e73)
+
+
+![VirtualBox_vsdworkshop_04_08_2024_01_07_20](https://github.com/user-attachments/assets/69497bc4-1fb1-4345-a9af-f3f81fc2488e)
+
+![VirtualBox_vsdworkshop_04_08_2024_01_09_37](https://github.com/user-attachments/assets/d2227de2-23a2-49bb-9b76-1c19be6f54db)<br>
+**COMMAND TO OPEN MAGIC IN ANOTHER TERMINAL**
+```bash
+# Change directory to path containing generated placement def
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/29-07_10-25/results/placement/
+
+# Command to load the placement def in magic tool
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.lef def read picorv32a.placement.def &
+```
+
+![VirtualBox_vsdworkshop_04_08_2024_01_13_06](https://github.com/user-attachments/assets/58da9098-5e8a-4603-8669-2527461e3d21)
+
+
+![VirtualBox_vsdworkshop_04_08_2024_01_16_03](https://github.com/user-attachments/assets/66cdc14c-e40b-47f6-9fe1-86da8e2b35dc)<br>
+
+## D4 SK2 Timing analysis using ideal clock using openSTA<br>
+
+**Setup timing Analysis and Introduction to Flipflop setup time**
+
+
+
+![setup](https://github.com/user-attachments/assets/b4045b45-7d4f-4460-8aed-3ed143dd3736)<br>
+Let's start the setup analysis with the ideal clock(single clock). specifications of the clock is
+
+clock frequency =1 GHz
+
+clock period =1 ns
+
+Now will do the analysis between '0' and 'T' clock period. We sent at edge to the launch flop at '0' clock period and at T=1ns period the second edge reached to capture flop.
+
+Let's say here we have combinatonal delay of theta and set up timing analysis says that this combinational delay should be less than the T for system to work properly.
+Now let's open the capture flop and we will see some combinational circuit there it has several MOSFETs , several logics,resistances and capacitances inside it.Also have the time graph for this particular flop
+When there is logic '0' or logic '1' of clock 1 the delay of MUX1 and MUX2 will restrict or effect the combinational delay requirement.
+
+So there is some finite amount of time which is required to the D input to settle and this amount of time is reffered to as SET UP TIME.
+
+Hence finite time 's' required before clk edge for 'D' to reach Qm.
+
+So, we can write that the internal delay of the MUX1 = set up time(S).
+
+So, now θ<T becomes θ<(T-S).<br>
+**Introduction to clock jitter and uncertainity**
+
+
+![jitter1](https://github.com/user-attachments/assets/1081967d-3259-4ecf-a7b3-cdf41b2fa0e4)<br>
+
+So in Jitter the clock is being created by PLL(phase-locked loops) and the clk source is expected to sent the clk signal at exactly 0,T,2T,....But that clk source might or might ot be able to generate the clk exactly at 0 or any other certain time because of it's inbuilt variations that is called jitter. Jitter is refered as temporary variation of the clk pulse.
+Let's consider this uncertantity time(US) in consideration. So, now equation will become θ<(T-S-US). Now assuming 'S'=0.01ns and 'US'=0.09ns. by taking this, Let's identify the timing path in our circuit stage 1 and stage 3 logic path has single clock.
+
+Now,we have to identify the combinational path delay for the both logics.<br>
+**Do post synthesis timing analysis with opensta**<br>
+```bash
+# Change directory to openlane flow directory
+cd Desktop/work/tools/openlane_working_dir/openlane
+docker
+
+# Now that we have entered the OpenLANE flow contained docker sub-system we can invoke the OpenLANE flow in the Interactive mode using the following command
+./flow.tcl -interactive
+
+# Now that OpenLANE flow is open we have to input the required packages for proper functionality of the OpenLANE flow
+package require openlane 0.9
+
+# Now the OpenLANE flow is ready to run any design and initially we have to prep the design creating some necessary files and directories for running a specific design which in our case is 'picorv32a'
+prep -design picorv32a
+
+# Adiitional commands to include newly added lef to openlane flow
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+# Command to set new value for SYNTH_SIZING
+set ::env(SYNTH_SIZING) 1
+
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+```
+
+  ![VirtualBox_vsdworkshop_04_08_2024_15_06_14](https://github.com/user-attachments/assets/50663432-cef4-4300-a8ee-c28ee42e5162)<br>
+  Newly created ```pre_sta.conf ```for STA analysis in openlane directory
+  
+
+![VirtualBox_vsdworkshop_04_08_2024_15_07_03](https://github.com/user-attachments/assets/6aec13fa-f00f-49b6-9fb9-f68afc4a8c0d)
+
+Newly created ```my_base.sdc```for STA analysis in ```openlane/designs/picorv32a/src directory``` based on the file```openlane/scripts/base.sdc```
+
+![VirtualBox_vsdworkshop_04_08_2024_15_11_46](https://github.com/user-attachments/assets/72263eb3-43e2-44a5-9747-1d180f724cc8)
+
+![VirtualBox_vsdworkshop_08_08_2024_16_10_37](https://github.com/user-attachments/assets/6fb2f8e9-a152-4bcd-8354-129d5c117098)<br>
+```bash
+# Change directory to openlane
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+# Command to invoke OpenSTA tool with script
+sta pre_sta.conf
+```
+
+
+![VirtualBox_vsdworkshop_08_08_2024_16_15_50](https://github.com/user-attachments/assets/93c3c46b-b3fb-463e-b421-1a174ef0ba10)
+
+![VirtualBox_vsdworkshop_04_08_2024_15_11_22](https://github.com/user-attachments/assets/7749895f-e700-4d4f-83d2-c1377e85657e)<br>
+Since more fanout is causing more delay we can add parameter to reduce fanout and do synthesis again
+
+Commands to include new lef and perform synthesis
+```bash
+# Now the OpenLANE flow is ready to run any design and initially we have to prep the design creating some necessary files and directories for running a specific design which in our case is 'picorv32a'
+prep -design picorv32a -tag 29-07_10-25 -overwrite
+
+# Adiitional commands to include newly added lef to openlane flow
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+# Command to set new value for SYNTH_SIZING
+set ::env(SYNTH_SIZING) 1
+
+# Command to set new value for SYNTH_MAX_FANOUT
+set ::env(SYNTH_MAX_FANOUT) 4
+
+# Command to display current value of variable SYNTH_DRIVING_CELL to check whether it's the proper cell or not
+echo $::env(SYNTH_DRIVING_CELL)
+
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+# Change directory to openlane
+cd Desktop/work/tools/openlane_working_dir/openlane
+
+# Command to invoke OpenSTA tool with script
+sta pre_sta.conf
+```
+
+![VirtualBox_vsdworkshop_04_08_2024_15_12_54](https://github.com/user-attachments/assets/55183310-2ec8-4f2c-b3af-d75dba8edc95)
+
+![VirtualBox_vsdworkshop_04_08_2024_15_13_56](https://github.com/user-attachments/assets/36e9abc5-2168-4c03-b75c-b9df95fec940)
+![VirtualBox_vsdworkshop_04_08_2024_15_16_30](https://github.com/user-attachments/assets/b8f5d6c5-2646-4264-8a94-da19ace94b88)<br>
+**Make timing ECO FIXES TO REMOVE ALL VIOLATION**<br>
+OR gate of driving strength 2 is driving 4 fanouts<br>
+
+
+
+![1](https://github.com/user-attachments/assets/57f5159e-03da-43f6-99d6-fc8b26f6e7d9)<br>
+**Commands to perform analysis and optimize timing by replacing with OR gate of drive strength 4**
+```bash
+# Reports all the connections to a net
+report_net -connections _11668_
+
+# Replacing cell
+replace_cell _14506_ sky130_fd_sc_hd__or4_4
+
+# Generating custom timing report
+report_checks -fields {net cap slew input_pins} -digits 4
+```
+
+![2](https://github.com/user-attachments/assets/69de151b-f4a7-40e0-914e-f50c8a1151b5)
+
+
+![3](https://github.com/user-attachments/assets/642862d9-722f-4c17-b264-354a9e5e1f87)
+
+![4](https://github.com/user-attachments/assets/61aaa85a-5883-4ec1-af2e-f73c2797f861)<br>
+OR gate of drive strength 2 is driving 4 fanouts
+
+
+![5](https://github.com/user-attachments/assets/94f2606a-591e-4ac6-bddd-5215654beb6f)<br>
+**Commands to perform analysis and optimize timing by replacing with OR gate of drive strength 4**
+```bash
+# Reports all the connections to a net
+report_net -connections _11675_
+
+# Replacing cell
+replace_cell _14514_ sky130_fd_sc_hd__or3_4
+
+# Generating custom timing report
+report_checks -fields {net cap slew input_pins} -digits 4
+```
+
+![6](https://github.com/user-attachments/assets/5704beb9-03e3-4010-a19c-12c393c3a680)
+
+
+![7](https://github.com/user-attachments/assets/7a672c62-1d6e-430f-bd52-71bd23b48daa)<br>
+OR gate of drive strength 2 driving OA gate has more delay
+
+![8](https://github.com/user-attachments/assets/df0eb30b-f35a-471a-b364-14c89b71f024)<br>
+ **Commands to perform analysis and optimize timing by replacing with OR gate of drive strength 4**
+ ```bash
+# Reports all the connections to a net
+report_net -connections _11643_
+
+# Replacing cell
+replace_cell _14481_ sky130_fd_sc_hd__or4_4
+
+# Generating custom timing report
+report_checks -fields {net cap slew input_pins} -digits 4
+```
+
+![9](https://github.com/user-attachments/assets/9897b255-c413-4f5d-b247-7dd5a39c1e1c)
+
+![10](https://github.com/user-attachments/assets/d08759d7-b55d-4f37-951e-911a56a40016)<br>
+
+OR gate of drive strength 2 driving OA gate has more delay
+
+
+![11](https://github.com/user-attachments/assets/4d749d2c-59ac-4524-ad53-df92ea2d8adc)<br>
+**Commands to perform analysis and optimize timing by replacing with OR gate of drive strength 4**
+```bash
+
+# Reports all the connections to a net
+report_net -connections _11668_
+
+# Replacing cell
+replace_cell _14506_ sky130_fd_sc_hd__or4_4
+
+# Generating custom timing report
+report_checks -fields {net cap slew input_pins} -digits 4
+```
+
+![12](https://github.com/user-attachments/assets/9588846a-47ce-44a0-8289-1e023e2f2b0a)
+![13](https://github.com/user-attachments/assets/465304ba-12c7-4678-b92b-8eb9f87a8d48)<br>
+**We see that the overall slack is reduced**<br>
+## D4 SK3 Clock Tree Synthesis TritonCTS and signal integrity<br>
+**Clock Tree routing and buffering Using H-tree algorithm**
+
+
+![clock tree](https://github.com/user-attachments/assets/c30ea7b7-d33f-464e-a5d7-a8ef0e49413d)<br>
+**Clock tree synthesis**:Let's connect clk1 to FF1 & FF2 of stage 1 and FF1 of stage 3 and FF2 of stage 4 with physical wire.Now let's see what is the problem with this? Let's consider some physical distance from clk to FF1 and FF2 , so due to this t2>t1.
+
+Skew= t2-t1, and skew should be 0ps.Previously we have build bad tree now we will try to modify that in a smarter way. Hrre clk will come in somewhere mid points with this clk will reach to every flip flop at almost same time. In the same way we will connect the clk2 with flip flops like midpoint manner.Now will see clock tree synthesis(Buffering), Let's we have some clock route through which it has to reach to particular locations and clock end points and in the path many capacitance, resitors are there.<br>
+
+
+![clock tree 1](https://github.com/user-attachments/assets/73ceea05-5fd3-4e9e-9e96-d7d33a6266fe)<br>
+Because of the wire length we did not get the same wave form at ouput as input and bcz of RC networks , so to resolve this problem we use repeaters. The only difference between the repeaters we use for clock or for data path is that clock repeaters repeaters will have equal rise and fall time.
+
+First step is we will remove the clock route and place 2 repeaters and allow the clock to go through this particular repeater, in this case whatever wave form is generated here will go to the output. So we can as many as repeaters we want to make the continuous flow of th clock till the output.
+
+![clocktree2](https://github.com/user-attachments/assets/30c0ac94-fe64-4d64-9057-b3b158c5258d)<br>
+#### Cross talk and Clock Net Shielding
+**Clocknet shielding**:Is a technique used in digital integrated circuit (IC) design to minimize the effects of noise and crosstalk on the clock signal. The clock signal is one of the most critical signals in a chip, and its integrity is vital for the proper functioning of the circuit. Shielding helps ensure that the clock signal remains clean and consistent by reducing interference from neighboring signals.<br>
+**Crosstalk**:Crosstalk refers to the unwanted interference caused by a signal in one circuit or wire influencing a signal in an adjacent circuit or wire. In the context of integrated circuits (ICs), crosstalk primarily occurs when a signal in one net induces noise in a neighboring net due to capacitive or inductive coupling.<br>
+
+![cross talk](https://github.com/user-attachments/assets/850ab9af-eb9a-49a7-8369-d1b8a41c4793)
+
+![cosstalk1](https://github.com/user-attachments/assets/e37e64d0-e734-4d17-a964-d0f04d9ba837)
 
