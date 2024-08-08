@@ -25,7 +25,7 @@ Here I have demonstrated the process of converting a RTL to GDS II.This is a two
     * [D4 SK1 Timing modelling using delay tables](#d4-sk1-timing-modelling-using-delay-tables)
     * [D4 SK2 Timing analysis using ideal clock using openSTA](#d4-sk2-timing-analysis-using-ideal-clock-using-opensta)
     * [D4 SK3 Clock Tree Synthesis TritonCTS and signal integrity](#d4-sk3-clock-tree-synthesis-tritonCTS-and-signal-integrity)
-    * [D4  SK4 Timing analysis with real clocks using openSTA](d4-sk4-timing-analysis-with-real-clocks-using-open-sta)
+    * [D4  SK4 Timing analysis with real clocks using openSTA](#d4-sk4-timing-analysis-with-real-clocks-using-open-sta)
   * [DAY 5 Final steps for RTL2GDS using Tritronroute and openSTA](day-5-final-steps-for-rtl2gds-using-tritronroute-and-opensta)
      * [D5 SK1 Routing and design rule check](d5-sk1-routing-and-design-rule-check)
      * [D5 SK2 Power distribution network and routing](d5-sk2-power-distribution-network-and-routing)
@@ -1350,5 +1350,227 @@ First step is we will remove the clock route and place 2 repeaters and allow the
 
 ![cross talk](https://github.com/user-attachments/assets/850ab9af-eb9a-49a7-8369-d1b8a41c4793)
 
-![cosstalk1](https://github.com/user-attachments/assets/e37e64d0-e734-4d17-a964-d0f04d9ba837)
+![cosstalk1](https://github.com/user-attachments/assets/e37e64d0-e734-4d17-a964-d0f04d9ba837)<br>
+**Lab steps to run CTS using triton**<br>
+**Replace the old netlist with the new netlist generated after timing ECO fix and implement the floorplan, placement and cts**
+```bash
+# Change from home directory to synthesis results directory
+cd Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/29-07_10-25/results/synthesis/
+
+# List contents of the directory
+ls
+
+# Copy and rename the netlist
+cp picorv32a.synthesis.v picorv32a.synthesis_old.v
+
+# List contents of the directory
+ls
+```
+
+![VirtualBox_vsdworkshop_08_08_2024_18_59_41](https://github.com/user-attachments/assets/3b97bf7f-15d8-410f-993e-8a29d85cbe30)<br>
+Command to write verilog
+```bash
+
+# Check syntax
+help write_verilog
+
+# Overwriting current synthesis netlist
+write_verilog /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/29-07_10-25/results/synthesis/picorv32a.synthesis.v
+
+# Exit from OpenSTA since timing analysis is done
+exit
+```
+
+![VirtualBox_vsdworkshop_04_08_2024_16_28_17](https://github.com/user-attachments/assets/68bb08ec-2ef1-4bdf-9686-5e628d205caf)<br>
+Verified that the netlist is overwritten by checking that instance``` _14506_``` is replaced with ```sky130_fd_sc_hd__or4_4```
+
+![VirtualBox_vsdworkshop_04_08_2024_16_29_38-replacement successful](https://github.com/user-attachments/assets/a495367e-a364-451b-87ac-d97509b64d80)<br>
+Since we confirmed that netlist is replaced and will be loaded in PnR but since we want to follow up on the earlier 0 violation design we are continuing with the clean design to further stages
+
+Commands load the design and run necessary stages
+```bash
+# Now once again we have to prep design so as to update variables
+prep -design picorv32a -tag 29-07_10-25 -overwrite
+
+# Addiitional commands to include newly added lef to openlane flow merged.lef
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+
+# Command to set new value for SYNTH_STRATEGY
+set ::env(SYNTH_STRATEGY) "DELAY 3"
+
+# Command to set new value for SYNTH_SIZING
+set ::env(SYNTH_SIZING) 1
+
+# Now that the design is prepped and ready, we can run synthesis using following command
+run_synthesis
+
+# Follwing commands are alltogather sourced in "run_floorplan" command
+init_floorplan
+place_io
+tap_decap_or
+
+# Now we are ready to run placement
+run_placement
+
+# Incase getting error
+unset ::env(LIB_CTS)
+
+# With placement done we are now ready to run CTS
+run_cts
+```
+![VirtualBox_vsdworkshop_04_08_2024_17_46_04](https://github.com/user-attachments/assets/b5932cd2-25a4-4d19-8159-da6fcc69db88)
+
+![VirtualBox_vsdworkshop_04_08_2024_17_46_47](https://github.com/user-attachments/assets/533cf13c-a690-46c7-bfd7-ad6bbadbbfed)
+
+![VirtualBox_vsdworkshop_04_08_2024_18_10_31](https://github.com/user-attachments/assets/e0875ad1-4e6b-4a08-85e8-9c082ce202cf)
+![VirtualBox_vsdworkshop_04_08_2024_18_11_46](https://github.com/user-attachments/assets/e78b1b35-b6bf-42e4-a1bf-3bf154f97c22)
+## D4  SK4 Timing analysis with real clocks using openSTA
+**Setup analysis with real clock**
+
+
+![setup with real](https://github.com/user-attachments/assets/8160aead-5e62-4151-8324-d643b67fd7c3)<br>
+**Hold analysis with real clock**
+
+
+
+![hold analysis](https://github.com/user-attachments/assets/07c222b4-64a0-4a0a-a9d7-051f8ee69977)
+![hold real](https://github.com/user-attachments/assets/ebbc6d54-2f9d-4fb7-b5fc-2fc587572c88)<br>
+**Post cts OPENROAD TIMING analyis**
+```bash
+# Command to run OpenROAD tool
+openroad
+
+# Reading lef file
+read_lef /openLANE_flow/designs/picorv32a/runs/29-07_10-25/tmp/merged.lef
+
+# Reading def file
+read_def /openLANE_flow/designs/picorv32a/runs/29-07_10-25/results/cts/picorv32a.cts.def
+
+# Creating an OpenROAD database to work with
+write_db pico_cts.db
+
+# Loading the created database in OpenROAD
+read_db pico_cts.db
+
+# Read netlist post CTS
+read_verilog /openLANE_flow/designs/picorv32a/runs/29-07_10-25/results/synthesis/picorv32a.synthesis_cts.v
+
+# Read library for design
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+
+# Link design and library
+link_design picorv32a
+
+# Read in the custom sdc we created
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+
+# Setting all cloks as propagated clocks
+set_propagated_clock [all_clocks]
+
+# Check syntax of 'report_checks' command
+help report_checks
+
+# Generating custom timing report
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+
+# Exit to OpenLANE flow
+exit
+```
+
+
+![VirtualBox_vsdworkshop_04_08_2024_19_51_05](https://github.com/user-attachments/assets/478def47-e87c-4087-ae99-35d71cd699fc)
+
+![VirtualBox_vsdworkshop_04_08_2024_19_56_48](https://github.com/user-attachments/assets/8272d640-0f3c-43a0-a136-0cac50ce8c72)
+
+
+
+![VirtualBox_vsdworkshop_04_08_2024_20_02_42](https://github.com/user-attachments/assets/e9366bdf-f754-4106-b532-e81d79bae1d3)
+
+
+![VirtualBox_vsdworkshop_04_08_2024_20_03_41](https://github.com/user-attachments/assets/d2590de4-ffa5-4f0c-a8fb-e89f5c665e54)<br>
+**Explore post-CTS OpenROAD timing analysis by removing 'sky130_fd_sc_hd__clkbuf_1' cell from clock buffer list variable 'CTS_CLK_BUFFER_LIST'**
+```bash
+# Checking current value of 'CTS_CLK_BUFFER_LIST'
+echo $::env(CTS_CLK_BUFFER_LIST)
+
+# Removing 'sky130_fd_sc_hd__clkbuf_1' from the list
+set ::env(CTS_CLK_BUFFER_LIST) [lreplace $::env(CTS_CLK_BUFFER_LIST) 0 0]
+
+# Checking current value of 'CTS_CLK_BUFFER_LIST'
+echo $::env(CTS_CLK_BUFFER_LIST)
+
+# Checking current value of 'CURRENT_DEF'
+echo $::env(CURRENT_DEF)
+
+# Setting def as placement def
+set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/29-07_10-25/results/placement/picorv32a.placement.def
+
+# Run CTS again
+run_cts
+
+# Checking current value of 'CTS_CLK_BUFFER_LIST'
+echo $::env(CTS_CLK_BUFFER_LIST)
+
+# Command to run OpenROAD tool
+openroad
+
+# Reading lef file
+read_lef /openLANE_flow/designs/picorv32a/runs/29-07_10-25/tmp/merged.lef
+
+# Reading def file
+read_def /openLANE_flow/designs/picorv32a/runs/29-07_10-25/results/cts/picorv32a.cts.def
+
+# Creating an OpenROAD database to work with
+write_db pico_cts1.db
+
+# Loading the created database in OpenROAD
+read_db pico_cts.db
+
+# Read netlist post CTS
+read_verilog /openLANE_flow/designs/picorv32a/runs/29-07_10-25/results/synthesis/picorv32a.synthesis_cts.v
+
+# Read library for design
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+
+# Link design and library
+link_design picorv32a
+
+# Read in the custom sdc we created
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+
+# Setting all cloks as propagated clocks
+set_propagated_clock [all_clocks]
+
+# Generating custom timing report
+report_checks -path_delay min_max -fields {slew trans net cap input_pins} -format full_clock_expanded -digits 4
+
+# Report hold skew
+report_clock_skew -hold
+
+# Report setup skew
+report_clock_skew -setup
+
+# Exit to OpenLANE flow
+exit
+
+# Checking current value of 'CTS_CLK_BUFFER_LIST'
+echo $::env(CTS_CLK_BUFFER_LIST)
+
+# Inserting 'sky130_fd_sc_hd__clkbuf_1' to first index of list
+set ::env(CTS_CLK_BUFFER_LIST) [linsert $::env(CTS_CLK_BUFFER_LIST) 0 sky130_fd_sc_hd__clkbuf_1]
+
+# Checking current value of 'CTS_CLK_BUFFER_LIST'
+echo $::env(CTS_CLK_BUFFER_LIST)
+```
+![VirtualBox_vsdworkshop_04_08_2024_23_07_15](https://github.com/user-attachments/assets/52ca802f-3cb4-45fc-a8bb-0eaea80fbbd8)
+
+![VirtualBox_vsdworkshop_04_08_2024_23_16_20](https://github.com/user-attachments/assets/420254f6-d525-4ce4-bdbd-645bba916eca)
+
+![VirtualBox_vsdworkshop_04_08_2024_23_24_31](https://github.com/user-attachments/assets/fc0e229d-118f-4ea0-90d0-7a72792b3640)
+
+![VirtualBox_vsdworkshop_04_08_2024_23_31_23](https://github.com/user-attachments/assets/fa078dc7-1722-4453-b6bb-7a6bb95b6134)
+
+![VirtualBox_vsdworkshop_04_08_2024_23_34_00](https://github.com/user-attachments/assets/486ae600-2a7c-449d-aec4-fa53c0d192d8)
+
 
